@@ -62,11 +62,25 @@ public abstract class Movement : MonoBehaviour {
         }
     }
 
+    protected virtual void AttemptMove <T> (int xDir, int yDir)
+        where T : Component
+    {
+        RaycastHit2D hit;
+        bool canMove = Move(xDir, yDir, out hit);
+
+        if (hit.transform == null)
+            return;
+
+        T hitComponent = hit.transform.GetComponent<T>();
+
+        if (!canMove && hitComponent != null)
+            OnCantMove(hitComponent);
+    }
+
     // Function that will handle cases in which the character shouldn't be able to move, i.e. collision
     protected abstract void OnCantMove <T> (T component)
-    {
         where T : Component;
-    }
+
 	// Update is called once per frame
 	void Update()
     {
