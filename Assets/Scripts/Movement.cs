@@ -27,10 +27,12 @@ public abstract class Movement : MonoBehaviour {
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
 
+        // BoxCollider initialized to false until character encounters collision
         boxCollider.enabled = false;
-        hit = Physics2D.Linecast(start end, blockingLayer);
+        hit = Physics2D.Linecast(start, end, blockingLayer);
         boxCollider.enabled = true;
 
+        // Checks if the character collides, and ends movement if true
         if (hit.transform == null)
         {
             StartCoroutine(SmoothMovement(end));
