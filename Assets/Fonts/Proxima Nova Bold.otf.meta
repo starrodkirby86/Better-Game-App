@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8846f83605fa0bc43bb8d56b262e0e99
+timeCreated: 1456562767
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 2
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 1
+  characterPadding: 0
+  includeFontData: 1
+  use2xBehaviour: 0
+  fontNames:
+  - Proxima Nova Bold
+  customCharacters: 
+  fontRenderingMode: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
