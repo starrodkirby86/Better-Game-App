@@ -62,6 +62,7 @@ public abstract class Movement : MonoBehaviour {
         }
     }
 
+    // Function that will check if a movement is valid, then calls movement functions if valid
     protected virtual void AttemptMove <T> (int xDir, int yDir)
         where T : Component
     {
