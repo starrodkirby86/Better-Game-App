@@ -4,6 +4,10 @@
  * Derived from BaseRuleset
  */
 
+// TODO:
+// REFACTOR TO USE COORD TYPE???
+// MAY MAKE OOB COUNTING EASIER
+
 using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
@@ -35,7 +39,7 @@ public class CellularAutomata : BaseRuleset {
 			}
 		}
 
-		Debug.Log (counter);
+		//Debug.Log (counter);
 		return counter;
 	}
 
@@ -91,9 +95,11 @@ public class CellularAutomata : BaseRuleset {
 		
 		Debug.Log ("Step 3");
 
+		/*
 		// Print the map.
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++)
 				Debug.Log( (map[i,j] == Tile.Floor1 ) ? "." : "x" );
+		*/
 	}
 }

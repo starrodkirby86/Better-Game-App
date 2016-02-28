@@ -4,6 +4,10 @@
  * Derived from BaseRuleset
  */
 
+// TODO:
+// REFACTOR TO USE COORD TYPE???
+// MAY MAKE OOB COUNTING EASIER
+
 using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
