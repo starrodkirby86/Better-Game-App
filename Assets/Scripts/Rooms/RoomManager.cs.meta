@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: ddc08989c129e7543a1bdfa6d87af70d
-timeCreated: 1456567884
+timeCreated: 1456640367
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - floorTile: {fileID: 125342, guid: 65f58ea11c589294bb3b49377d92f9dc, type: 2}
+  - wallTile: {fileID: 162192, guid: b76c5881fda7b034cb5a8dceb8c0c228, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

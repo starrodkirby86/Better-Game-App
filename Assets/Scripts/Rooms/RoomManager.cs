@@ -38,8 +38,9 @@ public class RoomManager : MonoBehaviour {
 	// SOME HARD VAULES FOR TEMPORARY MEASURE
 	public int rows = 8;
 	public int columns = 8;
-	public GameObject dummyFloor;
-	public GameObject dummyWall;
+	//public BaseRuleset selectedRule;
+	public GameObject floorTile;
+	public GameObject wallTile;
 
 	// SOME PRIVATES HAHAHA
 	private Transform boardHolder; // Holds up all the tile objects
@@ -50,6 +51,7 @@ public class RoomManager : MonoBehaviour {
 
 		// Generate a map from Cellular Automata.
 		CellularAutomata foo = new CellularAutomata(rows, columns);
+		//PureRandom foo = new PureRandom(rows, columns);
 		foo.generateMap ();
 
 		Tile[,] mapConvert = foo.map;
@@ -58,9 +60,9 @@ public class RoomManager : MonoBehaviour {
 			for(int y = 0; y < columns; y++) {
 				GameObject instantiateMe;
 				if( mapConvert[x,y] == Tile.OuterWall1 )
-					instantiateMe = dummyWall;
+					instantiateMe = wallTile;
 				else
-					instantiateMe = dummyFloor;
+					instantiateMe = floorTile;
 
 				GameObject instance = Instantiate(instantiateMe, new Vector3 (x, y, 0), Quaternion.identity) as GameObject;
 				instance.transform.SetParent(boardHolder);
