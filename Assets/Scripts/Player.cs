@@ -9,6 +9,8 @@ using System.Collections;
 // operations such as exponential functions and randomization for variance.
 /**********************************************************************************/
 
+// TODO: We need to write code to handle when the user distributes their skill points upon leveling up
+
 public class Player : MonoBehaviour {
 
     // Initialized variables for character values
@@ -29,12 +31,32 @@ public class Player : MonoBehaviour {
         playerStrength = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerStrSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerStrSkill);
         playerDefense = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerDefSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerDefSkill);
         playerIntelligence = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerIntSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerIntSkill);
+    }
 
-        if (playerExperience > Mathf.Pow(playerLevel, 2))
+    // Function which handles the required amount of experience points needed for the player to level up
+    // Nested loops are used to increase the amount of experience required if the player is a higher level
+    public void playerLevelUp()
+    {
+        if (playerLevel <= 5)
         {
-            playerLevel++;
+            if (playerExperience > 100 * playerLevel)
+                playerLevel++;
         }
-
+        else if (playerLevel <= 10)
+        {
+            if (playerExperience > 125 * playerLevel)
+                playerLevel++;
+        }
+        else if (playerLevel <= 15)
+        {
+            if (playerExperience > 155 * playerLevel)
+                playerLevel++;
+        }
+        else
+        {
+            if (playerExperience > 195 * playerLevel)
+                playerLevel++;
+        }
     }
     
 	// Use this for initialization
