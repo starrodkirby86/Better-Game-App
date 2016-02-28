@@ -1,24 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**********************************************************************************/
+// The purpose of this script is to provide a location where all of the player's
+// combat statistics are stored and operated on. An example of an operation would
+// be the calculation to determine when the player should level up, or how the
+// player's character statistics are calculated. This is done with basic maths
+// operations such as exponential functions and randomization for variance.
+/**********************************************************************************/
+
 public class Player : MonoBehaviour {
 
     // Initialized variables for character values
     public float restartLevelDelay = 1f;
-    public int playerHealth;
-    public int playerMana;
-    public int playerStrength;
-    public int playerDefense;
-    public int playerIntelligence;
-    public int playerLevel = 1;
-    public int playerExperience = 0;
+    public int playerHealth, playerMana, playerStrength, playerDefense, playerIntelligence, playerLevel = 1, playerExperience = 0;
 
     // Initialized variables for manually upgrading character stats
-    public int playerHPSkill;
-    public int playerMPSkill;
-    public int playerStrSkill;
-    public int playerDefSkill;
-    public int playerIntSkill;
+    public int playerHPSkill, playerMPSkill, playerStrSkill, playerDefSkill, playerIntSkill;
 
     // Function which will randomly assign character statistics with a +/- 20% variance based on player level
     // and will account for manual skill upgrades when the user levels up
