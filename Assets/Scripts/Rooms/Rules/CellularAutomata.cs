@@ -25,7 +25,7 @@ public class CellularAutomata : BaseRuleset {
 			for(int j = -1; j < 2; ++j) {
 			// Check if it's not OOB
 			if( (x+i) > 0 && (x+i) < r && (y+j) > 0 && (y+j) < c) {
-				if(i != 0 && j != 0)
+				if(!(i == 0 && j == 0))
 					counter += ( map[x+i,y+j] == Tile.OuterWall1 ) ? 1 : 0;
 			}
 			else
@@ -68,7 +68,7 @@ public class CellularAutomata : BaseRuleset {
 
 		Debug.Log ("Step 2");
 
-		for(int x = 0; x < 1; x++)
+		for(int x = 0; x < 4; x++)
 		{
 			Tile[,] newMap = new Tile[row,col];
 			for(int i = 0; i < row; i++)
