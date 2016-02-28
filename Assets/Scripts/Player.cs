@@ -24,8 +24,7 @@ public class Player : MonoBehaviour {
     // and will account for manual skill upgrades when the user levels up
     // TO-DO: Refactor this code to improve readability and usability later on, in other words,
     // separate functionalities into their individual functions
-    public void playerStats()
-    {
+    public void playerStats() {
         playerHealth = Random.Range ((50 * playerLevel - 10 * playerLevel) + 10 * playerHPSkill, (50 * playerLevel + 10 * playerLevel) + 10 * playerHPSkill);
         playerMana = Random.Range ((20 * playerLevel - 4 * playerLevel) + 4 * playerMPSkill, (20 * playerLevel + 4 * playerLevel) + 4 * playerMPSkill);
         playerStrength = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerStrSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerStrSkill);
@@ -37,23 +36,19 @@ public class Player : MonoBehaviour {
     // Nested loops are used to increase the amount of experience required if the player is a higher level
     public void playerLevelUp()
     {
-        if (playerLevel <= 5)
-        {
+        if (playerLevel <= 5) {
             if (playerExperience > 100 * playerLevel)
                 playerLevel++;
         }
-        else if (playerLevel <= 10)
-        {
+        else if (playerLevel <= 10) {
             if (playerExperience > 125 * playerLevel)
                 playerLevel++;
         }
-        else if (playerLevel <= 15)
-        {
+        else if (playerLevel <= 15) {
             if (playerExperience > 155 * playerLevel)
                 playerLevel++;
         }
-        else
-        {
+        else {
             if (playerExperience > 195 * playerLevel)
                 playerLevel++;
         }

@@ -13,16 +13,14 @@ public abstract class Movement : MonoBehaviour {
     private float inverseMoveTime; // Initialized variable for inversed movement
 
 	// Use this for initialization
-	void Start()
-    {
+	void Start() {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
 	}
 	
     // Function that will handle whether or not the character will move position
-    protected bool Move (int xDir, int yDir, out RaycastHit2D hit)
-    {
+    protected bool Move (int xDir, int yDir, out RaycastHit2D hit) {
         // Vector that will begin at the current position
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
@@ -43,8 +41,7 @@ public abstract class Movement : MonoBehaviour {
 
     // Calculates the position of the character by comparing its position to the destination
     // While loop is used to continually check the position of the character to get smooth movement
-    protected IEnumerator SmoothMovement(Vector3 end)
-    {
+    protected IEnumerator SmoothMovement(Vector3 end) {
         // Defines float var that is set equal to the character's position - the destination location
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
@@ -64,8 +61,7 @@ public abstract class Movement : MonoBehaviour {
 
     // Function that will check if a movement is valid, then calls movement functions if valid
     protected virtual void AttemptMove <T> (int xDir, int yDir)
-        where T : Component
-    {
+        where T : Component {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
 
@@ -83,8 +79,7 @@ public abstract class Movement : MonoBehaviour {
         where T : Component;
 
 	// Update is called once per frame
-	void Update()
-    {
+	void Update() {
 	    
 	}
 }
