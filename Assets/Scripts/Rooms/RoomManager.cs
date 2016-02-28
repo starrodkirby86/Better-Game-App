@@ -29,7 +29,7 @@
 
 using UnityEngine;
 using System.Collections;
-using System.Colelctions.Generic;		// To use lists.
+using System.Collections.Generic;		// To use lists.
 using Random = UnityEngine.Random;		// Unity Random
 
 
