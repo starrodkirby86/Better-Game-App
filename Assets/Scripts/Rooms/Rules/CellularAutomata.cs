@@ -24,8 +24,15 @@ public class CellularAutomata : BaseRuleset {
 		for(int i = -1; i < 2; ++i)
 			for(int j = -1; j < 2; ++j) {
 			// Check if it's not OOB
-			if( (x+i) > 0 && (x+i) < r && (y+j) > 0 && (y+j) < c )
-				counter += ( map[x+i,y+j] == Tile.OuterWall1 ) ? 1 : 0;
+			if( (x+i) > 0 && (x+i) < r && (y+j) > 0 && (y+j) < c) {
+				if(i != 0 && j != 0)
+					counter += ( map[x+i,y+j] == Tile.OuterWall1 ) ? 1 : 0;
+			}
+			else
+			{
+				// OOB
+				counter += 1;
+			}
 		}
 
 		return counter;
@@ -39,7 +46,18 @@ public class CellularAutomata : BaseRuleset {
 
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++) 
-				map[i,j] = ( Random.Range(0, 100) < 45 ) ? Tile.OuterWall1 : Tile.Floor1;
+				map[i,j] = ( Random.Range(0, 100) < 40 ) ? Tile.OuterWall1 : Tile.Floor1;
+
+		// Also fill the corner wall tiles as walls
+		for(int i = 0; i < row; i++)
+		{
+			map[i,0] = Tile.OuterWall1;
+		}
+
+		for(int j = 0; j < col; j++)
+		{
+			map[0,j] = Tile.OuterWall1;
+		}
 
 		// Step 2: (looping step) until iterations complete
 		// if (space+adjspaces) > 4 then space -> wall
@@ -47,28 +65,25 @@ public class CellularAutomata : BaseRuleset {
 
 		Debug.Log ("Step 2");
 
-		for(int x = 0; x < 5; x++)
+		for(int x = 0; x < 2; x++)
 		{
 			Tile[,] newMap = new Tile[row,col];
 			for(int i = 0; i < row; i++)
 				for(int j = 0; j < col; j++){
 				int wallCounter = countWalls(i,j,map,row,col);
-				if(map[i,j] == Tile.OuterWall1) {
-					if( wallCounter >= 4 )
-						newMap[i,j] = Tile.OuterWall1;
-					if( wallCounter < 2 )
-						newMap[i,j] = Tile.Floor1;
-				}
+
+				// What should the cell do based on the adjacent cells?
+				// Use the 4-5 rule
+				if( wallCounter > 5 )
+					newMap[i,j] = Tile.OuterWall1;
+				else if( wallCounter < 4 )
+					newMap[i,j] = Tile.Floor1;
 				else
-				{
-					if( wallCounter >= 5 )
-						newMap[i,j] = Tile.OuterWall1;
-					else
-						newMap[i,j] = Tile.Floor1;
+					newMap[i,j] = map[i,j];
+
 				}
 			
 			map = newMap;
-			}
 		}
 		
 		Debug.Log ("Step 3");

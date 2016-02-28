@@ -28,20 +28,43 @@
 
 
 using UnityEngine;
-using System.Collections;
+using System;
 using System.Collections.Generic;		// To use lists.
 using Random = UnityEngine.Random;		// Unity Random
 
 
 public class RoomManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	// SOME HARD VAULES FOR TEMPORARY MEASURE
+	public int rows = 8;
+	public int columns = 8;
+	public GameObject dummyFloor;
+	public GameObject dummyWall;
+
+	// SOME PRIVATES HAHAHA
+	private Transform boardHolder; // Holds up all the tile objects
+
+	public void BoardSetup() {
+
+		boardHolder = new GameObject ("Board").transform;
+
+		// Generate a map from Cellular Automata.
+		CellularAutomata foo = new CellularAutomata(rows, columns);
+		foo.generateMap ();
+
+		Tile[,] mapConvert = foo.map;
+
+		for(int x = 0; x < rows; x++) {
+			for(int y = 0; y < columns; y++) {
+				GameObject instantiateMe;
+				if( mapConvert[x,y] == Tile.OuterWall1 )
+					instantiateMe = dummyWall;
+				else
+					instantiateMe = dummyFloor;
+
+				GameObject instance = Instantiate(instantiateMe, new Vector3 (x, y, 0), Quaternion.identity) as GameObject;
+				instance.transform.SetParent(boardHolder);
+			}
+		}
 	}
 }

@@ -3,11 +3,13 @@ using System.Collections;
 
 [System.Serializable]
 public class iamdog : MonoBehaviour {
-
+	
+	private RoomManager roomScript;
+	
 	// Use this for initialization
-	void Start () {
-		CellularAutomata hotLoad = new CellularAutomata(5,6);
-		hotLoad.generateMap();
+	void Start () { 
+		roomScript = GetComponent<RoomManager>();
+		roomScript.BoardSetup();
 	}
 	
 	// Update is called once per frame
