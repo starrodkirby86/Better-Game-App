@@ -9,7 +9,6 @@ public class iamdog : MonoBehaviour {
 	// Use this for initialization
 	void Start () { 
 		roomScript = GetComponent<RoomManager>();
-		roomScript.BoardSetup();
 	}
 	
 	// Update is called once per frame

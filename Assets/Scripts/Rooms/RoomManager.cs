@@ -38,23 +38,28 @@ public class RoomManager : MonoBehaviour {
 	// SOME HARD VAULES FOR TEMPORARY MEASURE
 	public int rows = 8;
 	public int columns = 8;
-	//public BaseRuleset selectedRule;
+	public BaseRuleset selectedRule;
 	public GameObject floorTile;
 	public GameObject wallTile;
 
 	// SOME PRIVATES HAHAHA
 	private Transform boardHolder; // Holds up all the tile objects
 
+	public void Start() {
+		selectedRule = new CellularAutomata(rows, columns); // Default upon startup unless...
+		BoardSetup ();
+	}
+
 	public void BoardSetup() {
 
 		boardHolder = new GameObject ("Board").transform;
 
 		// Generate a map from Cellular Automata.
-		CellularAutomata foo = new CellularAutomata(rows, columns);
+		// CellularAutomata foo = new CellularAutomata(rows, columns);
 		//PureRandom foo = new PureRandom(rows, columns);
-		foo.generateMap ();
+		selectedRule.generateMap ();
 
-		Tile[,] mapConvert = foo.map;
+		Tile[,] mapConvert = selectedRule.map;
 
 		for(int x = 0; x < rows; x++) {
 			for(int y = 0; y < columns; y++) {
