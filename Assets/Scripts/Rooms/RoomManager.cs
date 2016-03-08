@@ -46,7 +46,7 @@ public class RoomManager : MonoBehaviour {
 	private Transform boardHolder; // Holds up all the tile objects
 
 	public void Start() {
-		selectedRule = new CellularAutomata(rows, columns); // Default upon startup unless...
+		selectedRule = new PureRandom(rows, columns); // Default upon startup unless...
 		BoardSetup ();
 	}
 
