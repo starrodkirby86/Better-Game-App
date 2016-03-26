@@ -69,13 +69,10 @@ protected override void Start()
     // Function that handles case where player cannot move
     // TO-DO: modify this to work with collisions; the other implementation
     // destroys the walls instead of just colliding
-    /*protected override void OnCantMove <T> (T component)
+    protected override void OnCantMove <T> (T component)
     {
-        Wall hitWall = component as Wall;
-
-        hitWall.DamageWall(wallDamage);
-        Animator.SetTrigger("playerChop");
-    }*/
+		GameManager.instance.GameOver();
+    }
 
     public void Restart()
     {

@@ -75,8 +75,8 @@ public abstract class Movement : MonoBehaviour {
     }
 
     // Function that will handle cases in which the character shouldn't be able to move, i.e. collision
-    /*protected abstract void OnCantMove <T> (T component)
-        where T : Component;*/
+    protected abstract void OnCantMove <T> (T component)
+        where T : Component;
 
 	// Update is called once per frame
 	protected virtual void Update() {
