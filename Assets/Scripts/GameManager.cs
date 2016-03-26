@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
-    public BoardManager boardScript;
+    //public BoardManager boardScript;
     public int playerHealth = 100; // initialized player health variable
     public int playerMana = 100; // initialized player mana variable
     [HideInInspector]
@@ -19,13 +19,13 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        boardScript = GetComponent<BoardManager>();
+        //boardScript = GetComponent<BoardManager>();
         InitGame();
     }
 
     // Use this for initialization
     void InitGame() {
-        boardScript.SetupScene(level);
+        //boardScript.SetupScene(level);
     }
 
     // Initializes game over event to be false until determined true

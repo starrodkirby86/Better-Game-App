@@ -13,7 +13,7 @@ public abstract class Movement : MonoBehaviour {
     private float inverseMoveTime; // Initialized variable for inversed movement
 
 	// Use this for initialization
-	void Start() {
+	protected virtual void Start() {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
@@ -75,11 +75,11 @@ public abstract class Movement : MonoBehaviour {
     }
 
     // Function that will handle cases in which the character shouldn't be able to move, i.e. collision
-    protected abstract void OnCantMove <T> (T component)
-        where T : Component;
+    /*protected abstract void OnCantMove <T> (T component)
+        where T : Component;*/
 
 	// Update is called once per frame
-	void Update() {
+	protected virtual void Update() {
 	    
 	}
 }

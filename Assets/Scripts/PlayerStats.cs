@@ -11,11 +11,18 @@ using System.Collections;
 
 // TODO: We need to write code to handle when the user distributes their skill points upon leveling up
 
-public class Player : MonoBehaviour {
+public class PlayerStats : MonoBehaviour {
+    public int playerHealth { get; set; }
+    public int playerMana { get; set; }
+    public int playerStrength { get; set; }
+    public int playerDefense { get; set; }
+    public int playerIntelligence { get; set; }
+    public int playerLevel { get; set; }
+    public int playerExperience { get; set; }
 
     // Initialized variables for character values
     public float restartLevelDelay = 1f;
-    public int playerHealth, playerMana, playerStrength, playerDefense, playerIntelligence, playerLevel = 1, playerExperience = 0;
+    //public int playerHealth, playerMana, playerStrength, playerDefense, playerIntelligence, playerLevel = 1, playerExperience = 0;
 
     // Initialized variables for manually upgrading character stats
     public int playerHPSkill, playerMPSkill, playerStrSkill, playerDefSkill, playerIntSkill;
