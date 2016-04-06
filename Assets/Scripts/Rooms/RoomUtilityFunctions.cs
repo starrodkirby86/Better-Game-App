@@ -15,6 +15,7 @@ using System.Collections.Generic;
 /**
  * Generic functions that help make adding certain
  * tiles when generating algorithms.
+ * -> Explode tile
  */
 public class TileFunctions {
 
@@ -23,6 +24,8 @@ public class TileFunctions {
 /**
  * Fnuctions that help verify aspects of a map to 
  * help ensure that the map made is a "good" one.
+ * -> DFS
+ * -> Floodfill a particular point and return the area
  */
 public class MapValidationFunctions {
 

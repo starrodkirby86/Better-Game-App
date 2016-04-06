@@ -21,6 +21,7 @@ public abstract class Movement : MonoBehaviour {
 	
     // Function that will handle whether or not the character will move position
     protected bool Move (int xDir, int yDir, out RaycastHit2D hit) {
+		
         // Vector that will begin at the current position
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
@@ -33,8 +34,9 @@ public abstract class Movement : MonoBehaviour {
         // Checks if the character collides, and ends movement if true
         if (hit.transform == null)
         {
-            StartCoroutine(SmoothMovement(end));
-            return true;
+            //StartCoroutine(SmoothMovement(end));
+			rb2D.MovePosition (end);
+			return true;
         }
         return false;
     }
@@ -42,12 +44,14 @@ public abstract class Movement : MonoBehaviour {
     // Calculates the position of the character by comparing its position to the destination
     // While loop is used to continually check the position of the character to get smooth movement
     protected IEnumerator SmoothMovement(Vector3 end) {
+
         // Defines float var that is set equal to the character's position - the destination location
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
         // Using previously defined float var, the location of the character is moved until remaining distance == 0
         while (sqrRemainingDistance > float.Epsilon)
         {
+			//Debug.Log (sqrRemainingDistance);
             Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
 
             // Position of our object is set to this new position
