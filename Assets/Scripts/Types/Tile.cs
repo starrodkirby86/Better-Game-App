@@ -23,5 +23,7 @@ public enum Tile {
 	// -- PILLAR TILES
 	Pillar1,
 	// -- DOOR TILES
-	Door1
+	Door1,
+	// -- STAIR TILES
+	Stair1
 };

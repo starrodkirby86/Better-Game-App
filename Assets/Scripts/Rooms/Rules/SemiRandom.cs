@@ -46,11 +46,14 @@ public class SemiRandom : BaseRuleset {
 					map[i,j] = ( Random.Range(0, 100) < 85 ) ? Tile.Floor1 : Tile.Pillar1;
 				}
 
+		int doororstair = Random.Range(0, 100) < 50 ) ? 0 : 1;
+
+		if (doororstair == 0) {
 		int where; int place;
 			where = ( Random.Range(0, 100) < 50 ) ? 0 : 1;
 		if (where == 0) {
 			place = Random.Range(0, row);
-			while (place == 0 || place == row - 1) {
+			while (place == 0 || place == row-1) {
 				place = Random.Range(0, row);
 			}
 			int colwhere = Random.Range(0, 2);
@@ -79,5 +82,63 @@ public class SemiRandom : BaseRuleset {
 			}
 
 		}
+		}
+		else {
+			int i = Random.Range(0, row); //randomizes the row index for the stair
+			while (i == 0 || i == row-1) {
+				i = Random.Range(0, row);
+			}
+
+			int j = Random.Range(0, col); //randomizes the column index for the stair
+			while (j == 0 || j == col-1) {
+				j = Random.Range(0, col);
+			}
+			map[i, j] = Tile.Stair1;
+			int space = Random.Range(0, 4);
+			while (space > 0 && space <= 4) {
+				
+				if (space == 1) {
+					if (i-1 != 0) {
+						map[i-1,j] = Tile.Floor1;
+						break;
+					}
+					else {
+						space = Random.Range(0, 4);
+						continue;
+					}
+				}
+				else if (space == 2) {
+					if ((i+1) != (rows - 1)) {
+						map[i+1,j] = Tile.Floor1;
+						break;
+					}
+					else {
+						space = Random.Range(0, 4);
+						continue;
+					}
+				}
+				else if (space == 3) {
+					if (j-1 != 0) {
+						map[i,j-1] = Tile.Floor1;
+						break;
+					}
+					else {
+						space = Random.Range(0, 4);
+						continue;
+					}
+				}
+				else if (space == 4) {
+					if (j+1 != columns - 1) {
+						map[i,j+1] = Tile.Floor1;
+						break;
+					}
+					else {
+						space = Random.Range(0, 4);
+						continue;
+					}
+
+		}
+	}
+}
 	}
 }
