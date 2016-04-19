@@ -55,12 +55,12 @@ public class SemiRandom : BaseRuleset {
 			}
 			int colwhere = Random.Range(0, 2);
 			if (colwhere == 0) {
-				map[place][0] = Tile.Door1;
-				map[place][1] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+				map[place, 0] = Tile.Door1;
+				map[place, 1] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 			else {
-				map[place][col-1] = Tile.Door1;
-				map[place][col-2] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+				map[place, col-1] = Tile.Door1;
+				map[place, col-2] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 		}
 		else {
@@ -70,12 +70,12 @@ public class SemiRandom : BaseRuleset {
 			}
 			int rowwhere = Random.Range(0, 2);
 			if (rowwhere == 0) {
-				map[0][place] = Tile.Door1;
-				map[1][place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+				map[0, place] = Tile.Door1;
+				map[1, place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 			else {
-				map[row-1][place] = Tile.Door1;
-				map[row-2][place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+				map[row-1, place] = Tile.Door1;
+				map[row-2, place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 
 		}

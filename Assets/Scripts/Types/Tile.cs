@@ -4,6 +4,10 @@
  * Enumerator for the tiles of a map.
  * These tiles should correspond to Prefab tile states.
  * Update this list accordingly.
+ * 
+ * TODO:
+ * RESIZE TILESET SO THAT WALLS AREN'T BAD
+ * BECAUSE WE'RE STUCK
  */
 
 using UnityEngine;

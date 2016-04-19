@@ -39,18 +39,46 @@ public class RoomManager : MonoBehaviour {
 	public int rows = 8;
 	public int columns = 8;
 	public BaseRuleset selectedRule;
+
+	// Some dummy tiles
+	// TODO: Cleaner implementation of conversion between
+	// Tile enumerator and the corresponding tiles.
 	public GameObject floorTile;
 	public GameObject wallTile;
+	public GameObject doorTile;
+	public GameObject pillarTile;
 
 	// SOME PRIVATES HAHAHA
 	private Transform boardHolder; // Holds up all the tile objects
 
 	public void Start() {
-		selectedRule = new CellularAutomata(rows, columns); // Default upon startup unless...
-		BoardSetup ();
+		selectedRule = new SemiRandom(rows, columns); // Default upon startup unless...
+		boardSetup ();
 	}
 
-	public void BoardSetup() {
+	public void convertTiles( Tile[,] mapConvert ) {
+		for(int x = 0; x < rows; x++) {
+			for(int y = 0; y < columns; y++) {
+				GameObject instantiateMe;
+
+				// Todo: Change this into a general function that
+				// takes in an enum and does a better job with tile conversion.
+				if( mapConvert[x,y] == Tile.OuterWall1 )
+					instantiateMe = wallTile;
+				else if ( mapConvert[x,y] == Tile.Floor1 )
+					instantiateMe = floorTile;
+				else if ( mapConvert[x,y] == Tile.Door1 )
+					instantiateMe = doorTile;
+				else
+					instantiateMe = pillarTile;
+				
+				GameObject instance = Instantiate(instantiateMe, new Vector3 (x, y, 0), Quaternion.identity) as GameObject;
+				instance.transform.SetParent(boardHolder);
+			}
+		}
+	}
+
+	public void boardSetup() {
 
 		boardHolder = new GameObject ("Board").transform;
 
@@ -61,17 +89,7 @@ public class RoomManager : MonoBehaviour {
 
 		Tile[,] mapConvert = selectedRule.map;
 
-		for(int x = 0; x < rows; x++) {
-			for(int y = 0; y < columns; y++) {
-				GameObject instantiateMe;
-				if( mapConvert[x,y] == Tile.OuterWall1 )
-					instantiateMe = wallTile;
-				else
-					instantiateMe = floorTile;
+		convertTiles( mapConvert );
 
-				GameObject instance = Instantiate(instantiateMe, new Vector3 (x, y, 0), Quaternion.identity) as GameObject;
-				instance.transform.SetParent(boardHolder);
-			}
 		}
-	}
 }
