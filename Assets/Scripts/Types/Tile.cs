@@ -15,5 +15,9 @@ public enum Tile {
 	// -- FLOOR TILES
 	Floor1,
 	// -- WALL TILES
-	OuterWall1
+	OuterWall1,
+	// -- PILLAR TILES
+	Pillar1,
+	// -- DOOR TILES
+	Door1
 };
