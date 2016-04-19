@@ -1,6 +1,6 @@
 ﻿/**
  * SemiRandom.cs
- * Algorithm initializes a 2D array then decides if there'll be a stair or a door to clear the room.
+ * Algorithm initializes a 2D Matrix then decides if there'll be a stair or a door to clear the room.
  *
  * If stair, randomize and make sure stair is accessible
  * -Set all edges as walls, randomize pillars or tiles. Add a stair randomly,
@@ -49,11 +49,11 @@ public class SemiRandom : BaseRuleset {
 		int where; int place;
 			where = ( Random.Range(0, 100) < 50 ) ? 0 : 1;
 		if (where == 0) {
-			place = rand() % rows;
+			place = Random.Range(0, row);
 			while (place == 0 || place == row - 1) {
-				place = rand() % rows;
+				place = Random.Range(0, row);
 			}
-			int colwhere = rand() % 2;
+			int colwhere = Random.Range(0, 2);
 			if (colwhere == 0) {
 				map[place][0] = Tile.Door1;
 				map[place][1] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
@@ -64,11 +64,11 @@ public class SemiRandom : BaseRuleset {
 			}
 		}
 		else {
-			place = rand() % col;
+			place = Random.Range(0, col);
 			while (place == 0 || place == col-1) {
-				place = rand() % col;
+				place = Random.Range(0, col);
 			}
-			int rowwhere = rand() % 2;
+			int rowwhere = Random.Range(0, 2);
 			if (rowwhere == 0) {
 				map[0][place] = Tile.Door1;
 				map[1][place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
