@@ -34,12 +34,17 @@ public abstract class Movement : MonoBehaviour {
         // Checks if the character collides, and ends movement if true
         if (hit.transform == null)
         {
-            //StartCoroutine(SmoothMovement(end));
+            StartCoroutine(SmoothMovement(end));
 			rb2D.MovePosition (end);
 			return true;
         }
         return false;
     }
+
+	// Hop Jump! WITH A SKIP AND A HOP. SHE'S ONE COOL KONG
+	protected IEnumerator HopJump(Vector3 end) {
+		yield return null;
+	}
 
     // Calculates the position of the character by comparing its position to the destination
     // While loop is used to continually check the position of the character to get smooth movement
@@ -51,16 +56,17 @@ public abstract class Movement : MonoBehaviour {
         // Using previously defined float var, the location of the character is moved until remaining distance == 0
         while (sqrRemainingDistance > float.Epsilon)
         {
-			//Debug.Log (sqrRemainingDistance);
             Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
 
             // Position of our object is set to this new position
             rb2D.MovePosition(newPosition);
-            sqrRemainingDistance = (transform.position = end).sqrMagnitude;
+            sqrRemainingDistance = (transform.position - end).sqrMagnitude;
             
             // Used to exit the loop when necessary
             yield return null;
         }
+;
+
     }
 
     // Function that will check if a movement is valid, then calls movement functions if valid

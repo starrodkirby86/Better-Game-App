@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 guid: ddc08989c129e7543a1bdfa6d87af70d
-timeCreated: 1456640367
+timeCreated: 1461648894
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - floorTile: {fileID: 125342, guid: 65f58ea11c589294bb3b49377d92f9dc, type: 2}
   - wallTile: {fileID: 162192, guid: b76c5881fda7b034cb5a8dceb8c0c228, type: 2}
+  - doorTile: {fileID: 164752, guid: 3faabdd445a64ef4086cda59eccb3c86, type: 2}
+  - pillarTile: {fileID: 163018, guid: af357906d2131ac4cada0dbc044b1174, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
