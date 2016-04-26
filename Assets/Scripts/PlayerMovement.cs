@@ -27,7 +27,7 @@ protected override void Start()
     // Update is called once per frame, checks for player's turn and performs 2D movement
     protected override void Update()
     {
-        //if (!GameManager.instance.playersTurn) return;
+        if (!GameManager.instance.playersTurn) return;
 
         int horizontal = 0;
         int vertical = 0;

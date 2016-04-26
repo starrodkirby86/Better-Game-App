@@ -48,12 +48,20 @@ public class RoomManager : MonoBehaviour {
 	public GameObject doorTile;
 	public GameObject pillarTile;
 
+	// ENEMIES
+	public GameObject jiggles;
+	public GameObject wiggles;
+
 	// SOME PRIVATES HAHAHA
 	private Transform boardHolder; // Holds up all the tile objects
 
 	public void Start() {
-		selectedRule = new SemiRandom(rows, columns); // Default upon startup unless...
+		selectedRule = new CellularAutomata(rows, columns); // Default upon startup unless...
 		boardSetup ();
+
+		// For our dummy case, we can set up some enemy characters
+		// So wiggles and jiggles I guess
+		dummyEnemySetup();
 	}
 
 	public void convertTiles( Tile[,] mapConvert ) {
@@ -91,5 +99,24 @@ public class RoomManager : MonoBehaviour {
 
 		convertTiles( mapConvert );
 
+	}
+
+	public void dummyEnemySetup(){
+		int enemyCount = 0;
+		while(enemyCount < 8) {
+			int candidX = Random.Range(0, rows);
+			int candidY = Random.Range(0, columns); 
+			Tile[,] candidMap = selectedRule.map;
+			if(candidMap[candidX,candidY] == Tile.Floor1) {
+				GameObject instantiateMe;
+				if(Random.Range (0,2) == 0)
+					instantiateMe = wiggles;
+				else
+					instantiateMe = jiggles;
+
+				GameObject instance = Instantiate (instantiateMe, new Vector3(candidX, candidY, 0), Quaternion.identity) as GameObject;
+				enemyCount++;
+			}
 		}
+	}
 }
