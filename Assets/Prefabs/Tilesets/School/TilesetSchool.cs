@@ -15,5 +15,7 @@ public class TilesetSchool : Tileset {
 
 	public override void autoTiler(Tile[,] map) {
 		// This is where we'll try to implement Colin's autotiling algorithm
+		// A 0 == floor
+		// A nonzero is a wall 
 	}
 }
