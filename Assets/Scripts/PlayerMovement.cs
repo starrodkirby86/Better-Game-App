@@ -27,7 +27,7 @@ protected override void Start()
     // Update is called once per frame, checks for player's turn and performs 2D movement
     protected override void Update()
     {
-        //if (!GameManager.instance.playersTurn) return;
+        if (!GameManager.instance.playersTurn) return;
 
         int horizontal = 0;
         int vertical = 0;
@@ -35,11 +35,14 @@ protected override void Start()
         horizontal = (int)Input.GetAxisRaw("Horizontal");
         vertical = (int)Input.GetAxisRaw("Vertical");
 
-        if (horizontal != 0)
-            vertical = 0;
+		if(horizontal != 0)
+			vertical = 0;
+
+		if(vertical != 0)
+			horizontal = 0;
 
 		//Check if we have a non-zero value for horizontal or vertical
-		if(horizontal != 0 || vertical != 0)
+		if(horizontal != vertical)
 		{
 			//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
 			//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
@@ -54,7 +57,7 @@ protected override void Start()
 
         RaycastHit2D hit;
         //CheckIfGameOver();
-        //GameManager.instance.playersTurn = false;
+        GameManager.instance.playersTurn = false;
 		return;
     }
 

@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+[System.Serializable]
 public class GameManager : MonoBehaviour {
 
-    public static GameManager instance = null;
+	public float turnDelay = .1f;
+	public static GameManager instance = null;
+    private RoomManager roomScript;
 
-    //public BoardManager boardScript;
     public int playerHealth = 100; // initialized player health variable
     public int playerMana = 100; // initialized player mana variable
     [HideInInspector]
     public bool playersTurn = true; // Since the game is turn-based, boolean must be initialized for player turn
+
+	private List<Enemy> enemies; // observers subscribed to gamemanager
+	private bool enemiesMoving;
 
     // Initializes game object instance
     void Awake() {
@@ -17,15 +23,18 @@ public class GameManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+
+		enemies = new List<Enemy>();
+
         DontDestroyOnLoad(gameObject);
 
-        //boardScript = GetComponent<BoardManager>();
         InitGame();
     }
 
     // Use this for initialization
     void InitGame() {
-        //boardScript.SetupScene(level);
+		enemies.Clear();
+		roomScript = GetComponent<RoomManager>();
     }
 
     // Initializes game over event to be false until determined true
@@ -34,6 +43,39 @@ public class GameManager : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-	
+		//Check that playersTurn or enemiesMoving or doingSetup are not currently true.
+		if(playersTurn || enemiesMoving)
+			
+			//If any of these are true, return and do not start MoveEnemies.
+			return;
+		
+		//Start moving enemies.
+		StartCoroutine (MoveEnemies ());
+	}
+
+	public void AddEnemyToList(Enemy script)
+	{
+		//Add Enemy to List enemies.
+		enemies.Add(script);
+	}
+
+	IEnumerator MoveEnemies()
+	{
+		enemiesMoving = true;
+		yield return new WaitForSeconds(turnDelay);
+		if(enemies.Count == 0)
+		{
+			yield return new WaitForSeconds(turnDelay);
+		}
+
+		for (int i = 0; i < enemies.Count; i++)
+		{
+			enemies[i].MoveEnemy();
+			yield return new WaitForSeconds(enemies[i].moveTime);
+		}
+
+		playersTurn = true;
+
+		enemiesMoving = false;
 	}
 }
