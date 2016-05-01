@@ -62,6 +62,9 @@ public class RoomManager : MonoBehaviour {
 		// For our dummy case, we can set up some enemy characters
 		// So wiggles and jiggles I guess
 		dummyEnemySetup();
+
+		// And we may as well do a player one too. What the hey.
+		dummyPlayerSetup();
 	}
 
 	public void convertTiles( Tile[,] mapConvert ) {
@@ -117,6 +120,24 @@ public class RoomManager : MonoBehaviour {
 				GameObject instance = Instantiate (instantiateMe, new Vector3(candidX, candidY, 0), Quaternion.identity) as GameObject;
 				enemyCount++;
 			}
+		}
+	}
+
+	public void dummyPlayerSetup(){
+		// Simple function to put the player into some available spot in the map.
+		while(true){
+			int candidX = Random.Range(0, rows);
+			int candidY = Random.Range(0, columns); 
+			Tile[,] candidMap = selectedRule.map;
+			if(candidMap[candidX,candidY] == Tile.Floor1) {
+				// We need to move the player to this position.
+				Vector3 moveMe = new Vector3(candidX, candidY);
+				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
+				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
+				rb2D.MovePosition(moveMe);
+				return;
+			}
+
 		}
 	}
 }

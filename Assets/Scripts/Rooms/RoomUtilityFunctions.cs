@@ -29,7 +29,7 @@ public class TileFunctions {
  */
 public class MapValidationFunctions {
 	Boolean clearable = false;
-
+/*
 public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] oldChar, Tile[,] newChar) {
 	// The recursive algorithm. Starting at x and y, changes any adjacent
 	// characters that match oldChar to newChar.
@@ -62,4 +62,5 @@ public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] oldChar, Tile[,] n
 		if (y < mapHeight-1) // down
 			FloodFillCheck(map, x, y+1, oldChar, newChar);
 						}
+*/
 }
