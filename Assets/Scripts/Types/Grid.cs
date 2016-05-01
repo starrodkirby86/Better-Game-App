@@ -65,6 +65,10 @@ public class Coord {
 		        );
 	}
 
+	public bool isEqual(Coord b) {
+		return ( this.x == b.x && this.y == b.y );
+	}
+
 	public Direction rotate180(Direction d) {
 		switch(d) {
 		case Direction.North:

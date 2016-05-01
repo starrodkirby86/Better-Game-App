@@ -21,6 +21,9 @@ public abstract class BaseRuleset {
 	public int row { get; set; }
 	public int col { get; set; }
 
+	// To help out with life
+	public static MapValidationFunctions mapValidFuncs { get; set; }
+
 	// Public
 	public BaseRuleset() {
 		row = 2;
@@ -36,4 +39,5 @@ public abstract class BaseRuleset {
 
 	// Functions
 	public abstract void generateMap();
+	public abstract void initializeMap();
 }

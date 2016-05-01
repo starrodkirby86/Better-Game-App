@@ -24,26 +24,29 @@ public class SemiRandom : BaseRuleset {
 		row = r;
 		col = c;
 		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
 	}
 
 	public override void generateMap() {
+		int exitx;
+		int exity;
 
 		for(int i = 0; i < row; i++)
 		{
-			map[i, 0] = Tile.OuterWall1;
-			map[i, col-1] = Tile.OuterWall1;
+			map[i, 0].property = TileType.OuterWall1;
+			map[i, col-1].property = TileType.OuterWall1;
 		}
 
 		for(int j = 0; j < col; j++)
 		{
-			map[0, j] = Tile.OuterWall1;
-			map[row-1,j] = Tile.OuterWall1;
+			map[0, j].property = TileType.OuterWall1;
+			map[row-1,j].property = TileType.OuterWall1;
 		}
 
 		for(int i = 1; i < row-1; i++)
 			for(int j = 1; j < col-1; j++)
 				if (j != 0 || i != 0 || j != (col-1) || i != (row-1)) {
-					map[i,j] = ( Random.Range(0, 100) < 85 ) ? Tile.Floor1 : Tile.Pillar1;
+					map[i,j].property = ( Random.Range(0, 100) < 85 ) ? TileType.Floor1 : TileType.Pillar1;
 				}
 
 		int doororstair = ( Random.Range(0, 100) < 50 ) ? 0 : 1;
@@ -58,12 +61,16 @@ public class SemiRandom : BaseRuleset {
 			}
 			int colwhere = Random.Range(0, 2);
 			if (colwhere == 0) {
-				map[place, 0] = Tile.Door1;
-				map[place, 1] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+					map[place, 0].property = TileType.Door1;
+					exitx = place;
+					exity = 0;
+					map[place, 1].property = TileType.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 			else {
-				map[place, col-1] = Tile.Door1;
-				map[place, col-2] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+					map[place, col-1].property = TileType.Door1;
+					exitx = place;
+					exity = col-1;
+					map[place, col-2].property = TileType.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 		}
 		else {
@@ -73,12 +80,16 @@ public class SemiRandom : BaseRuleset {
 			}
 			int rowwhere = Random.Range(0, 2);
 			if (rowwhere == 0) {
-				map[0, place] = Tile.Door1;
-				map[1, place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+					map[0, place].property = TileType.Door1;
+					exitx = 0;
+					exity = place;
+					map[1, place].property = TileType.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 			else {
-				map[row-1, place] = Tile.Door1;
-				map[row-2, place] = Tile.Floor1; //override the adjacent non-wall tile next to door into floor tile
+					map[row-1, place].property = TileType.Door1;
+					exitx = row-1;
+					exity = place;
+					map[row-2, place].property = TileType.Floor1; //override the adjacent non-wall tile next to door into floor tile
 			}
 
 		}
@@ -93,13 +104,15 @@ public class SemiRandom : BaseRuleset {
 			while (j == 0 || j == col-1) {
 				j = Random.Range(0, col);
 			}
-			map[i, j] = Tile.Stair1;
+			map[i, j].property = TileType.Stair1;
+			exitx = i;
+			exity = j;
 			int space = Random.Range(0, 4);
 			while (space > 0 && space <= 4) {
 				
 				if (space == 1) {
 					if (i-1 != 0) {
-						map[i-1,j] = Tile.Floor1;
+						map[i-1,j].property = TileType.Floor1;
 						break;
 					}
 					else {
@@ -109,7 +122,7 @@ public class SemiRandom : BaseRuleset {
 				}
 				else if (space == 2) {
 					if ((i+1) != (row - 1)) {
-						map[i+1,j] = Tile.Floor1;
+						map[i+1,j].property = TileType.Floor1;
 						break;
 					}
 					else {
@@ -119,7 +132,7 @@ public class SemiRandom : BaseRuleset {
 				}
 				else if (space == 3) {
 					if (j-1 != 0) {
-						map[i,j-1] = Tile.Floor1;
+						map[i,j-1].property = TileType.Floor1;
 						break;
 					}
 					else {
@@ -129,7 +142,7 @@ public class SemiRandom : BaseRuleset {
 				}
 				else if (space == 4) {
 					if (j+1 != col - 1) {
-						map[i,j+1] = Tile.Floor1;
+						map[i,j+1].property = TileType.Floor1;
 						break;
 					}
 					else {
@@ -139,6 +152,18 @@ public class SemiRandom : BaseRuleset {
 
 		}
 	}
-}
+		}
+
+		// Validation portion, propose a shuffled spot and warp the player there.
+		mapValidFuncs.warpPlayer (map, row, col); 
+		GameObject playerChar = GameObject.FindGameObjectWithTag ("Player");
+		mapValidFuncs.FloodFillCheck(map, exitx, exity, new Coord(exitx,exity), new Coord((int)playerChar.transform.position.x,(int)playerChar.transform.position.y));
+		Debug.Log (mapValidFuncs.clearable);
+	}
+
+	public override void initializeMap(){
+		for(int i = 0; i < row; i++)
+			for(int j = 0; j < col; j++) 
+				map[i,j] = new Tile();
 	}
 }

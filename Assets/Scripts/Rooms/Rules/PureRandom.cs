@@ -19,6 +19,7 @@ public class PureRandom : BaseRuleset {
 		row = r;
 		col = c;
 		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
 	}
 	
 	public override void generateMap() {
@@ -29,24 +30,33 @@ public class PureRandom : BaseRuleset {
 		
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++) 
-				map[i,j] = ( Random.Range(0, 100) < 50 ) ? Tile.OuterWall1 : Tile.Floor1;
+				map[i,j].property = ( Random.Range(0, 100) < 50 ) ? TileType.OuterWall1 : TileType.Floor1;
 		
 		// Also fill the corner wall tiles as walls
 		for(int i = 0; i < row; i++)
 		{
-			map[i,0] = Tile.OuterWall1;
-			map[i,col-1] = Tile.OuterWall1;
+			map[i,0].property = TileType.OuterWall1;
+			map[i,col-1].property = TileType.OuterWall1;
 		}
 		
 		for(int j = 0; j < col; j++)
 		{
-			map[0,j] = Tile.OuterWall1;
-			map[row-1,j] = Tile.OuterWall1;
+			map[0,j].property = TileType.OuterWall1;
+			map[row-1,j].property = TileType.OuterWall1;
 		}
+
+		// Warp.
+		mapValidFuncs.warpPlayer(map, row, col);
 
 		// Print the map.
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++)
-				Debug.Log( (map[i,j] == Tile.Floor1 ) ? "." : "x" );
+				Debug.Log( (map[i,j].property == TileType.Floor1 ) ? "." : "x" );
+	}
+
+	public override void initializeMap(){
+		for(int i = 0; i < row; i++)
+			for(int j = 0; j < col; j++) 
+				map[i,j] = new Tile();
 	}
 }

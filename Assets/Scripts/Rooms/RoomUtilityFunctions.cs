@@ -10,6 +10,8 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;		// Unity Random
+
 
 
 /**
@@ -28,39 +30,61 @@ public class TileFunctions {
  * -> Floodfill a particular point and return the area
  */
 public class MapValidationFunctions {
-	Boolean clearable = false;
-/*
-public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] oldChar, Tile[,] newChar) {
-	// The recursive algorithm. Starting at x and y, changes any adjacent
-	// characters that match oldChar to newChar.
-		int mapWidth = map.GetLength(0);
-		int mapHeight = map.GetLength(1);
+	public Boolean clearable = false;
 
-		if (oldChar == null) {
-			oldChar = map[x][y];
+	// TODO:
+	// The floodfill check should not be a part of a ruleset, but
+	// actually its own unique phase inside board Setup or some other aspect.
+	//
+	// If we have the time, we should separate these. But for now, prioritize
+	// having flood fill work in general first.
+	public void warpPlayer(Tile[,] map, int rows, int columns) {
+
+		while(true){
+			int candidX = Random.Range(0, rows);
+			int candidY = Random.Range(0, columns); 
+			Tile[,] candidMap = map;
+			if((candidMap[candidX,candidY]).property == TileType.Floor1) {
+				// We need to move the player to this position.
+				Vector3 moveMe = new Vector3(candidX, candidY);
+				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
+				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
+				rb2D.MovePosition(moveMe);
+				return;
+			}
+			
 		}
+	}
 
-		if (map[x][y] != oldChar)
-			// Base case. If the current x, y character is not the oldChar,
-			// then do nothing.
-			return
+	public void FloodFillCheck(Tile[,] map, int x, int y, Coord start, Coord stop) {
+		// The recursive algorithm. Starting at x and y, traverse down adjacent tiles and mark them if travelled, find the exit from the entrance
+			int mapWidth = map.GetLength(0);
+			int mapHeight = map.GetLength(1);
 
-				// Change the character at world[x][y] to newChar
-				map[x][y] = newChar;
+			if (map[x,y].mark != 0)
+				// Base case. If the current tile is marked, then do nothing.
+				return;
 
-				// Recursive calls. Make a recursive call as long as we are not on the
-				// boundary (which would cause an Index Error.)
-		if (x > 0) // left
-			FloodFillCheck(map, x-1, y, oldChar, newChar);
+				// Change the current tile as marked
+				map[x,y].mark = 1;
 
-		if (y > 0) // up
-			FloodFillCheck(map, x, y-1, oldChar, newChar);
+			if ( stop.isEqual (new Coord(x,y)) ) {
+				clearable = true;
+				return;
+			}
+					// Recursive calls. Make a recursive call as long as we are not on the
+					// boundary (which would cause an Index Error.)
+			if (x > 0) // left
+				FloodFillCheck(map, x-1, y, start, stop);
 
-		if (x < mapWidth-1) // right
-			FloodFillCheck(map, x+1, y, oldChar, newChar);
+			if (y > 0) // up
+				FloodFillCheck(map, x, y-1, start, stop);
 
-		if (y < mapHeight-1) // down
-			FloodFillCheck(map, x, y+1, oldChar, newChar);
-						}
-*/
+			if (x < mapWidth-1) // right
+				FloodFillCheck(map, x+1, y, start, stop);
+
+			if (y < mapHeight-1) // down
+				FloodFillCheck(map, x, y+1, start, stop);
+
+	}
 }
