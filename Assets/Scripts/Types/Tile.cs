@@ -13,8 +13,9 @@
 using UnityEngine;
 using System.Collections;
 
-
-public enum Tile {
+public class Tile{
+	public int mark { get; set; }
+	public enum TileType {
 	// --- SET 1 - Dummy
 	// -- FLOOR TILES
 	Floor1,
@@ -26,4 +27,5 @@ public enum Tile {
 	Door1,
 	// -- STAIR TILES
 	Stair1
+	}
 };

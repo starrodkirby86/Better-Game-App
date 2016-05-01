@@ -29,24 +29,24 @@ public class PureRandom : BaseRuleset {
 		
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++) 
-				map[i,j] = ( Random.Range(0, 100) < 50 ) ? Tile.OuterWall1 : Tile.Floor1;
+				map[i,j] = ( Random.Range(0, 100) < 50 ) ? Tile.TileType.OuterWall1 : Tile.TileType.Floor1;
 		
 		// Also fill the corner wall tiles as walls
 		for(int i = 0; i < row; i++)
 		{
-			map[i,0] = Tile.OuterWall1;
-			map[i,col-1] = Tile.OuterWall1;
+			map[i,0] = Tile.TileType.OuterWall1;
+			map[i,col-1] = Tile.TileType.OuterWall1;
 		}
 		
 		for(int j = 0; j < col; j++)
 		{
-			map[0,j] = Tile.OuterWall1;
-			map[row-1,j] = Tile.OuterWall1;
+			map[0,j] = Tile.TileType.OuterWall1;
+			map[row-1,j] = Tile.TileType.OuterWall1;
 		}
 
 		// Print the map.
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++)
-				Debug.Log( (map[i,j] == Tile.Floor1 ) ? "." : "x" );
+				Debug.Log( (map[i,j] == Tile.TileType.Floor1 ) ? "." : "x" );
 	}
 }

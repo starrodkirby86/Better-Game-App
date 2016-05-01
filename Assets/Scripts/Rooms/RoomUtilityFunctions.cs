@@ -30,36 +30,34 @@ public class TileFunctions {
 public class MapValidationFunctions {
 	Boolean clearable = false;
 
-public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] oldChar, Tile[,] newChar) {
-	// The recursive algorithm. Starting at x and y, changes any adjacent
-	// characters that match oldChar to newChar.
+public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] start, Tile[,] stop) {
+	// The recursive algorithm. Starting at x and y, traverse down adjacent tiles and mark them if travelled, find the exit from the entrance
 		int mapWidth = map.GetLength(0);
 		int mapHeight = map.GetLength(1);
 
-		if (oldChar == null) {
-			oldChar = map[x][y];
+		if (map[x,y].mark != 0)
+			// Base case. If the current tile is marked, then do nothing.
+			return;
+
+			// Change the current tile as marked
+			map[x,y].mark = 1;
+
+		if (map[x,y] == stop) {
+			clearable = true;
+			return;
 		}
-
-		if (map[x][y] != oldChar)
-			// Base case. If the current x, y character is not the oldChar,
-			// then do nothing.
-			return
-
-				// Change the character at world[x][y] to newChar
-				map[x][y] = newChar;
-
 				// Recursive calls. Make a recursive call as long as we are not on the
 				// boundary (which would cause an Index Error.)
 		if (x > 0) // left
-			FloodFillCheck(map, x-1, y, oldChar, newChar);
+			FloodFillCheck(map, x-1, y, start, stop);
 
 		if (y > 0) // up
-			FloodFillCheck(map, x, y-1, oldChar, newChar);
+			FloodFillCheck(map, x, y-1, start, stop);
 
 		if (x < mapWidth-1) // right
-			FloodFillCheck(map, x+1, y, oldChar, newChar);
+			FloodFillCheck(map, x+1, y, start, stop);
 
 		if (y < mapHeight-1) // down
-			FloodFillCheck(map, x, y+1, oldChar, newChar);
+			FloodFillCheck(map, x, y+1, start, stop);
 						}
 }
