@@ -24,7 +24,7 @@ public class EnemyStats : MonoBehaviour {
 	private static RandomNames randomNames;
 
     // Initialized variables for character values
-    public float restartLevelDelay = 1f;
+    public float restartLevelDelay = 0.5f;
     //public int enemyHealth, enemyMana, enemyStrength, enemyDefense, enemyIntelligence, enemyLevel = 1, enemyExperience = 0;
 
     // Initialized variables for manually upgrading character stats

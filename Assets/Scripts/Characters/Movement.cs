@@ -16,7 +16,7 @@ public abstract class Movement : MonoBehaviour {
 	protected virtual void Start() {
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
-        inverseMoveTime = 1f / moveTime;
+        inverseMoveTime = 2f / moveTime;
 	}
 	
     // Function that will handle whether or not the character will move position

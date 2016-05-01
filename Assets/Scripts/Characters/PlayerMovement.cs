@@ -8,7 +8,7 @@ in this script */
     
 public class PlayerMovement : Movement
 {
-    public float restartLevelDelay = 1f;
+    public float restartLevelDelay = 0.5f;
     [SerializeField] PlayerStats playerStats;
     Animator animator;
     private int playerHealth;

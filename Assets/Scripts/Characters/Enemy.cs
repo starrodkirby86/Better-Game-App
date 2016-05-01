@@ -58,7 +58,12 @@ public class Enemy : Movement
    //hitPlayer.LoseFood(playerDamage); Find something to replace this mechanic with
 
     }
-    
+
+	// Update is called once per frame
+	protected override void Update() {
+		updateUI ();
+	}
+	
 	public void makeUI() {
 
 		GameObject newCanvas = Instantiate( enemyCanvas, new Vector3(0,0,0), Quaternion.identity ) as GameObject;
@@ -66,11 +71,16 @@ public class Enemy : Movement
 		GameObject enemyText = newCanvas.transform.GetChild(0).gameObject;
 		Text UIName = enemyText.GetComponent<Text>();
 		UIName.text = enemyStats.enemyName;
-		//Vector3 moveMe = new Vector3(0, 18.0f);
-		//enemyText.transform.position += moveMe;
-
+		GameObject enemyHPBar = newCanvas.transform.GetChild(1).gameObject;
+		Slider UIBar = enemyHPBar.GetComponent<Slider>();
+		UIBar.maxValue = enemyStats.enemyHealth;
+		UIBar.value = enemyStats.enemyCurrentHP;
 	}
 
 	public void updateUI() {
+		GameObject thisCanvas = this.transform.GetChild(0).gameObject; // The first child of the enemy should be the enemy canvas
+		GameObject enemyHPBar = thisCanvas.transform.GetChild(1).gameObject;
+		Slider UIBar = enemyHPBar.GetComponent<Slider>();
+		UIBar.value = enemyStats.enemyCurrentHP;
 	}
 }
