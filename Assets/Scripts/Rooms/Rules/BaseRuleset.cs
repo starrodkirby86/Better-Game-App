@@ -38,6 +38,7 @@ public abstract class BaseRuleset {
 	}
 
 	// Functions
+	public abstract void setRowCol(int r, int c);
 	public abstract void generateMap();
 	public abstract void initializeMap();
 }

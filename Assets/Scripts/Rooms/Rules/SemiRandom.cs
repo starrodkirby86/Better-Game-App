@@ -20,6 +20,13 @@ using Random = UnityEngine.Random;
 [System.Serializable]
 public class SemiRandom : BaseRuleset {
 
+	public SemiRandom() {
+		row = 8;
+		col = 8;
+		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
+	}
+
 	public SemiRandom(int r, int c) {
 		row = r;
 		col = c;
@@ -27,6 +34,12 @@ public class SemiRandom : BaseRuleset {
 		mapValidFuncs = new MapValidationFunctions();
 	}
 
+	public override void setRowCol(int r, int c) {
+		row = r;
+		col = c;
+		map = new Tile[row,col];
+	}
+	
 	public override void generateMap() {
 		int exitx;
 		int exity;

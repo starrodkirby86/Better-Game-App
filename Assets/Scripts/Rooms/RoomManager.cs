@@ -38,9 +38,11 @@ public class RoomManager : MonoBehaviour {
 	// SOME HARD VAULES FOR TEMPORARY MEASURE
 	public int rows = 8;
 	public int columns = 8;
-	public BaseRuleset selectedRule;
-	public int candidX;
-	public int candidY;
+	public Rulesets rulesetToGenerate;
+	private BaseRuleset selectedRule;
+	private RuleManager ruleMan;
+	private int candidX;
+	private int candidY;
 
 	// Some dummy tiles
 	// TODO: Cleaner implementation of conversion between
@@ -58,7 +60,9 @@ public class RoomManager : MonoBehaviour {
 	private Transform boardHolder; // Holds up all the tile objects
 
 	public void Start() {
-		selectedRule = new SemiRandom(rows, columns); // Default upon startup unless...
+		ruleMan = new RuleManager();
+		selectedRule = ruleMan.getRule(rulesetToGenerate); // Default upon startup unless...
+		selectedRule.setRowCol (rows, columns);
 		boardSetup ();
 
 		// For our dummy case, we can set up some enemy characters

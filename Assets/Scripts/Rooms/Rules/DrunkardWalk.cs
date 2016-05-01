@@ -18,12 +18,26 @@ using System.Collections;
 using Random = UnityEngine.Random;
 
 public class DrunkardWalk : BaseRuleset {
+
+	public DrunkardWalk() {
+		row = 8;
+		col = 8;
+		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
+	}
+
 	public DrunkardWalk(int r, int c) {
 		row = r;
 		col = c;
 		map = new Tile[row,col];
 	}
 
+	public override void setRowCol(int r, int c) {
+		row = r;
+		col = c;
+		map = new Tile[row,col];
+	}
+	
 	public void explodeSpace(Tile[,] map, Coord state, int m, int r, int c) {
 		// Carves additional spaces surrounding the block.
 		// The magnitude value m how far the cursor should carve.
