@@ -11,7 +11,9 @@ using System.Collections;
 
 // TODO: We need to write code to handle when the user distributes their skill points upon leveling up
 
+[System.Serializable]
 public class PlayerStats : MonoBehaviour {
+	public string playerName { get; set; }
     public int playerHealth { get; set; }
     public int playerMana { get; set; }
     public int playerStrength { get; set; }
@@ -27,16 +29,14 @@ public class PlayerStats : MonoBehaviour {
     // Initialized variables for manually upgrading character stats
     public int playerHPSkill, playerMPSkill, playerStrSkill, playerDefSkill, playerIntSkill;
 
+	public int playerCurrentHP, playerCurrentMP;
+
     // Function which will randomly assign character statistics with a +/- 20% variance based on player level
     // and will account for manual skill upgrades when the user levels up
     // TO-DO: Refactor this code to improve readability and usability later on, in other words,
     // separate functionalities into their individual functions
-    public void playerStats() {
-        playerHealth = Random.Range ((50 * playerLevel - 10 * playerLevel) + 10 * playerHPSkill, (50 * playerLevel + 10 * playerLevel) + 10 * playerHPSkill);
-        playerMana = Random.Range ((20 * playerLevel - 4 * playerLevel) + 4 * playerMPSkill, (20 * playerLevel + 4 * playerLevel) + 4 * playerMPSkill);
-        playerStrength = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerStrSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerStrSkill);
-        playerDefense = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerDefSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerDefSkill);
-        playerIntelligence = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerIntSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerIntSkill);
+    PlayerStats() {
+
     }
 
     // Function which handles the required amount of experience points needed for the player to level up
@@ -60,14 +60,17 @@ public class PlayerStats : MonoBehaviour {
                 playerLevel++;
         }
     }
-    
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	// Hi, Unity, let's cooperate with you today.
+	void Start() {
+		playerName = "Viridian";
+		playerHealth = Random.Range ((50 * playerLevel - 10 * playerLevel) + 10 * playerHPSkill, (50 * playerLevel + 10 * playerLevel) + 10 * playerHPSkill);
+		playerMana = Random.Range ((20 * playerLevel - 4 * playerLevel) + 4 * playerMPSkill, (20 * playerLevel + 4 * playerLevel) + 4 * playerMPSkill);
+		playerStrength = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerStrSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerStrSkill);
+		playerDefense = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerDefSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerDefSkill);
+		playerIntelligence = Random.Range((10 * playerLevel - 2 * playerLevel) + 2 * playerIntSkill, (10 * playerLevel + 2 * playerLevel) + 2 * playerIntSkill);
+
+		playerCurrentHP = playerHealth;
+		playerCurrentMP = playerMana;
 	}
 }

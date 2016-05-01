@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 // Enemy inherits from MovingObject, which is the base
@@ -7,9 +8,13 @@ using System.Collections;
 public class Enemy : Movement
 {
     public int playerDamage;
+	EnemyStats enemyStats;
     private Animator animator;
     private Transform target;
     private bool skipMove;
+	
+	public GameObject enemyCanvas;
+	//private Slider enemyHPBar;
 
     // Use this for initialization
     protected override void Start()
@@ -17,6 +22,8 @@ public class Enemy : Movement
         GameManager.instance.AddEnemyToList(this);
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+		enemyStats = GetComponent<EnemyStats>();
+		makeUI ();
         base.Start();
     }
 
@@ -51,5 +58,19 @@ public class Enemy : Movement
    //hitPlayer.LoseFood(playerDamage); Find something to replace this mechanic with
 
     }
-    // Update is called once per frame
+    
+	public void makeUI() {
+
+		GameObject newCanvas = Instantiate( enemyCanvas, new Vector3(0,0,0), Quaternion.identity ) as GameObject;
+		newCanvas.transform.SetParent (this.gameObject.transform, false);
+		GameObject enemyText = newCanvas.transform.GetChild(0).gameObject;
+		Text UIName = enemyText.GetComponent<Text>();
+		UIName.text = enemyStats.enemyName;
+		//Vector3 moveMe = new Vector3(0, 18.0f);
+		//enemyText.transform.position += moveMe;
+
+	}
+
+	public void updateUI() {
+	}
 }
