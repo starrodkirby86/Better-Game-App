@@ -24,6 +24,7 @@ public class SemiRandom : BaseRuleset {
 		row = r;
 		col = c;
 		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
 	}
 
 	public override void generateMap() {
@@ -153,7 +154,8 @@ public class SemiRandom : BaseRuleset {
 	}
 		}
 		GameObject playerChar = GameObject.FindGameObjectWithTag ("Player");
-		//MapValidationFunctions.FloodFillCheck(map, exitx, exity, map[exitx,exity], map[playerChar.transform.position.x,playerChar.transform.position.y]);
+		mapValidFuncs.FloodFillCheck(map, exitx, exity, new Coord(exitx,exity), new Coord((int)playerChar.transform.position.x,(int)playerChar.transform.position.y));
+		Debug.Log (mapValidFuncs.clearable);
 	}
 
 	public override void initializeMap(){

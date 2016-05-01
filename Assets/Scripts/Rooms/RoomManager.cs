@@ -58,7 +58,7 @@ public class RoomManager : MonoBehaviour {
 	private Transform boardHolder; // Holds up all the tile objects
 
 	public void Start() {
-		selectedRule = new CellularAutomata(rows, columns); // Default upon startup unless...
+		selectedRule = new SemiRandom(rows, columns); // Default upon startup unless...
 		boardSetup ();
 
 		// For our dummy case, we can set up some enemy characters

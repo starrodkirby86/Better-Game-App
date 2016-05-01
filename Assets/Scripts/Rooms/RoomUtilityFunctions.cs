@@ -28,11 +28,10 @@ public class TileFunctions {
  * -> Floodfill a particular point and return the area
  */
 public class MapValidationFunctions {
-	Boolean clearable = false;
+	public Boolean clearable = false;
 
 
-public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] start, Tile[,] stop) {
-		/*
+public void FloodFillCheck(Tile[,] map, int x, int y, Coord start, Coord stop) {
 	// The recursive algorithm. Starting at x and y, traverse down adjacent tiles and mark them if travelled, find the exit from the entrance
 		int mapWidth = map.GetLength(0);
 		int mapHeight = map.GetLength(1);
@@ -44,7 +43,7 @@ public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] start, Tile[,] sto
 			// Change the current tile as marked
 			map[x,y].mark = 1;
 
-		if (map[x,y] == stop) {
+		if ( stop.isEqual (new Coord(x,y)) ) {
 			clearable = true;
 			return;
 		}
@@ -61,6 +60,6 @@ public void FloodFillCheck(Tile[,] map, int x, int y, Tile[,] start, Tile[,] sto
 
 		if (y < mapHeight-1) // down
 			FloodFillCheck(map, x, y+1, start, stop);
-		*/
+
 }
 }
