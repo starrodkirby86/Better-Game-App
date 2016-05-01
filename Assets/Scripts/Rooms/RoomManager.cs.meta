@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ddc08989c129e7543a1bdfa6d87af70d
-timeCreated: 1461648894
+timeCreated: 1461658918
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -9,6 +9,8 @@ MonoImporter:
   - wallTile: {fileID: 162192, guid: b76c5881fda7b034cb5a8dceb8c0c228, type: 2}
   - doorTile: {fileID: 164752, guid: 3faabdd445a64ef4086cda59eccb3c86, type: 2}
   - pillarTile: {fileID: 163018, guid: af357906d2131ac4cada0dbc044b1174, type: 2}
+  - jiggles: {fileID: 148488, guid: 55e0694af6e26aa44b7928262f9328f9, type: 2}
+  - wiggles: {fileID: 146442, guid: 95aaec6847c272c40a257f09e1c2989b, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

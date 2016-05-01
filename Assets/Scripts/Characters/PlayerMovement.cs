@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /* TO-DO: There is an inheritance issue with the player health and animator
@@ -7,7 +8,7 @@ in this script */
     
 public class PlayerMovement : Movement
 {
-    public float restartLevelDelay = 1f;
+    public float restartLevelDelay = 0.5f;
     [SerializeField] PlayerStats playerStats;
     Animator animator;
     private int playerHealth;
@@ -27,6 +28,8 @@ protected override void Start()
     // Update is called once per frame, checks for player's turn and performs 2D movement
     protected override void Update()
     {
+		updateUI ();
+
         if (!GameManager.instance.playersTurn) return;
 
         int horizontal = 0;
@@ -102,4 +105,16 @@ protected override void Start()
 			Debug.Log ("Ass tits");
             //GameManager.instance.GameOver();
     }
+
+	// Update UI
+	private void updateUI() {
+		// Could be better BUT OH WELL LOL
+		// Updates the relevant UI items for the player.
+		GameObject UIName = GameObject.Find ("UI_Name");
+		GameObject UIHP = GameObject.Find ("UI_HP");
+		Text playerName = UIName.GetComponent<Text>() as Text; // This should be the player's name
+		playerName.text = playerStats.playerName;
+		Text playerHP = UIHP.GetComponent<Text>() as Text; // This should be the player's HP
+		playerHP.text = playerStats.playerCurrentHP.ToString () + "/" + playerStats.playerHealth.ToString ();
+	}
 }
