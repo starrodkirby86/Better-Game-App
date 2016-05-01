@@ -32,6 +32,9 @@ public class EnemyStats : MonoBehaviour {
 
 	public int enemyCurrentHP, enemyCurrentMP;
 
+	public firstNameList firstNameOrigin;
+	public lastNameList lastNameOrigin;
+
     // Function which will randomly assign character statistics with a +/- 20% variance based on enemy level
     // and will account for manual skill upgrades when the user levels up
     // TO-DO: Refactor this code to improve readability and usability later on, in other words,
@@ -40,7 +43,7 @@ public class EnemyStats : MonoBehaviour {
 	// Hi Unity.
 	void Awake() {
 		randomNames = new RandomNames();
-		enemyName = randomNames.getName (nameList.funny);
+		enemyName = randomNames.getName (firstNameOrigin, lastNameOrigin);
 		enemyHealth = Random.Range ((50 * enemyLevel - 10 * enemyLevel) + 10 * enemyHPSkill, (50 * enemyLevel + 10 * enemyLevel) + 10 * enemyHPSkill);
 		enemyMana = Random.Range ((20 * enemyLevel - 4 * enemyLevel) + 4 * enemyMPSkill, (20 * enemyLevel + 4 * enemyLevel) + 4 * enemyMPSkill);
 		enemyStrength = Random.Range((10 * enemyLevel - 2 * enemyLevel) + 2 * enemyStrSkill, (10 * enemyLevel + 2 * enemyLevel) + 2 * enemyStrSkill);

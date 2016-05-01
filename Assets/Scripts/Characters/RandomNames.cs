@@ -12,26 +12,40 @@ using System.Collections.Specialized;
  */
 public class RandomNames {
 
-	HybridDictionary nameDb = new HybridDictionary();
+	HybridDictionary firstNameDb = new HybridDictionary();
+	HybridDictionary lastNameDb = new HybridDictionary();
 
 	public RandomNames() {
-		fillDatabase ();
+		fillFirstNameDatabase ();
+		fillLastNameDatabase ();
 	}
 
-	public string getName(nameList n) {
+	public string getName(firstNameList m, lastNameList n) {
 		// Based on the enumerator, we're going to pick a name from the txt file thrown at us.
 		// Randomly, of course. Because that's the beauty of it all.
-		TextAsset nameList = Resources.Load ("NameLists/" + nameDb[(int)n]) as TextAsset;
+		TextAsset firstNameList = Resources.Load ("NameLists/firstNames/" + firstNameDb[(int)m]) as TextAsset;
 		//Debug.Log ("NameLists/" + nameDb[(int)n]);
-		string[] lines = nameList.text.Split ('\n');
-		return lines[ Random.Range (0, lines.Length)];
+		string[] lines = firstNameList.text.Split ('\n');
+		string firstName = lines[ Random.Range (0, lines.Length)];
+
+		// And now the last name.
+		TextAsset lastNameList = Resources.Load ("NameLists/lastNames/" + lastNameDb[(int)n]) as TextAsset;
+		//Debug.Log ("NameLists/" + nameDb[(int)n]);
+		lines = lastNameList.text.Split ('\n');
+		string lastName = lines[ Random.Range (0, lines.Length)];
+		return firstName + " " + lastName;
 	}
 
 	// Initialization function. Basically, we can recognize the existence of txt files here.
-	public void fillDatabase() {
+	public void fillFirstNameDatabase() {
 		int counter = 0;
-		nameDb.Add ( counter++, "first-names" ); 
-		nameDb.Add ( counter++, "funny" );
+		firstNameDb.Add ( counter++, "firstNames" ); 
+		firstNameDb.Add ( counter++, "generic" );
+	}
+
+	public void fillLastNameDatabase() {
+		int counter = 0;
+		lastNameDb.Add ( counter++, "lastNames" ); 
 	}
 }
 
@@ -39,7 +53,15 @@ public class RandomNames {
  * What list of names should we pick from?
  * Should correspond to the fillDatabase(), and vice versa.
  */
-public enum nameList {
+public enum firstNameList {
 	firstNames,
-	funny
+	generic
+};
+
+/**
+ * What list of names should we pick from?
+ * Should correspond to the fillDatabase(), and vice versa.
+ */
+public enum lastNameList {
+	lastNames
 };
