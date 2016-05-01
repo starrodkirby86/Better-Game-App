@@ -153,6 +153,9 @@ public class SemiRandom : BaseRuleset {
 		}
 	}
 		}
+
+		// Validation portion, propose a shuffled spot and warp the player there.
+		mapValidFuncs.warpPlayer (map, row, col); 
 		GameObject playerChar = GameObject.FindGameObjectWithTag ("Player");
 		mapValidFuncs.FloodFillCheck(map, exitx, exity, new Coord(exitx,exity), new Coord((int)playerChar.transform.position.x,(int)playerChar.transform.position.y));
 		Debug.Log (mapValidFuncs.clearable);

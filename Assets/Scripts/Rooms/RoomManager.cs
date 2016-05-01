@@ -66,7 +66,7 @@ public class RoomManager : MonoBehaviour {
 		dummyEnemySetup();
 
 		// And we may as well do a player one too. What the hey.
-		dummyPlayerSetup();
+		//dummyPlayerSetup();
 	}
 
 	public void convertTiles( Tile[,] mapConvert ) {

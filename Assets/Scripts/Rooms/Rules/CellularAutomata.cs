@@ -19,6 +19,7 @@ public class CellularAutomata : BaseRuleset {
 		row = r;
 		col = c;
 		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
 	}
 
 	public int countWalls(int x, int y, Tile[,] map, int r, int c) {
@@ -101,6 +102,9 @@ public class CellularAutomata : BaseRuleset {
 		}
 		
 		Debug.Log ("Step 3");
+
+		// New purpose! WARP THE PLAYER to a proposed spot and see if we can accomplish floodfill.
+		mapValidFuncs.warpPlayer (map, row, col);
 
 		/*
 		// Print the map.

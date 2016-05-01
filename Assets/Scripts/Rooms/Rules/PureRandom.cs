@@ -19,6 +19,7 @@ public class PureRandom : BaseRuleset {
 		row = r;
 		col = c;
 		map = new Tile[row,col];
+		mapValidFuncs = new MapValidationFunctions();
 	}
 	
 	public override void generateMap() {
@@ -43,6 +44,9 @@ public class PureRandom : BaseRuleset {
 			map[0,j].property = TileType.OuterWall1;
 			map[row-1,j].property = TileType.OuterWall1;
 		}
+
+		// Warp.
+		mapValidFuncs.warpPlayer(map, row, col);
 
 		// Print the map.
 		for(int i = 0; i < row; i++)
