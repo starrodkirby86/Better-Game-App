@@ -30,7 +30,7 @@ public class CellularAutomata : BaseRuleset {
 			// Check if it's not OOB
 			if( (x+i) > 0 && (x+i) < r && (y+j) > 0 && (y+j) < c) {
 				if(!(i == 0 && j == 0))
-						counter += ( map[x+i,y+j] == Tile.TileType.OuterWall1 ) ? 1 : 0;
+					counter += ( map[x+i,y+j].property == TileType.OuterWall1 ) ? 1 : 0;
 			}
 			else
 			{
@@ -45,25 +45,26 @@ public class CellularAutomata : BaseRuleset {
 
 	public override void generateMap() {
 		// This is where the cellular automata algorithm begins.
+
 		// Step 1: Fill the map randomly based on MAX walls
 
 		Debug.Log ("Step 1");
 
 		for(int i = 0; i < row; i++)
 			for(int j = 0; j < col; j++) 
-				map[i,j] = ( Random.Range(0, 100) < 40 ) ? Tile.TileType.OuterWall1 : Tile.TileType.Floor1;
+				map[i,j].property = ( Random.Range(0, 100) < 40 ) ? TileType.OuterWall1 : TileType.Floor1;
 
 		// Also fill the corner wall tiles as walls
 		for(int i = 0; i < row; i++)
 		{
-			map[i,0] = Tile.TileType.OuterWall1;
-			map[i,col-1] = Tile.TileType.OuterWall1;
+			map[i,0].property = TileType.OuterWall1;
+			map[i,col-1].property = TileType.OuterWall1;
 		}
 
 		for(int j = 0; j < col; j++)
 		{
-			map[0,j] = Tile.TileType.OuterWall1;
-			map[row-1,j] = Tile.TileType.OuterWall1;
+			map[0,j].property = TileType.OuterWall1;
+			map[row-1,j].property = TileType.OuterWall1;
 		}
 
 		// Step 2: (looping step) until iterations complete
@@ -75,6 +76,12 @@ public class CellularAutomata : BaseRuleset {
 		for(int x = 0; x < 4; x++)
 		{
 			Tile[,] newMap = new Tile[row,col];
+
+			// Initialize tiles
+			for(int i = 0; i < row; i++)
+				for(int j = 0; j < col; j++) 
+					newMap[i,j] = new Tile();
+
 			for(int i = 0; i < row; i++)
 				for(int j = 0; j < col; j++){
 				int wallCounter = countWalls(i,j,map,row,col);
@@ -82,11 +89,11 @@ public class CellularAutomata : BaseRuleset {
 				// What should the cell do based on the adjacent cells?
 				// Use the 4-5 rule
 				if( wallCounter > 4 )
-						newMap[i,j] = Tile.TileType.OuterWall1;
+					newMap[i,j].property = TileType.OuterWall1;
 				else if( wallCounter < 4 )
-						newMap[i,j] = Tile.TileType.Floor1;
+					newMap[i,j].property = TileType.Floor1;
 				else
-					newMap[i,j] = map[i,j];
+					newMap[i,j].property = map[i,j].property;
 
 				}
 			
@@ -101,5 +108,11 @@ public class CellularAutomata : BaseRuleset {
 			for(int j = 0; j < col; j++)
 				Debug.Log( (map[i,j] == Tile.Floor1 ) ? "." : "x" );
 		*/
+	}
+
+	public override void initializeMap(){
+		for(int i = 0; i < row; i++)
+			for(int j = 0; j < col; j++) 
+				map[i,j] = new Tile();
 	}
 }

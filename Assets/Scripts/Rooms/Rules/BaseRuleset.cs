@@ -36,4 +36,5 @@ public abstract class BaseRuleset {
 
 	// Functions
 	public abstract void generateMap();
+	public abstract void initializeMap();
 }

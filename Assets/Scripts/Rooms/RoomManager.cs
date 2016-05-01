@@ -58,7 +58,7 @@ public class RoomManager : MonoBehaviour {
 	private Transform boardHolder; // Holds up all the tile objects
 
 	public void Start() {
-		selectedRule = new SemiRandom(rows, columns); // Default upon startup unless...
+		selectedRule = new CellularAutomata(rows, columns); // Default upon startup unless...
 		boardSetup ();
 
 		// For our dummy case, we can set up some enemy characters
@@ -76,11 +76,11 @@ public class RoomManager : MonoBehaviour {
 
 				// Todo: Change this into a general function that
 				// takes in an enum and does a better job with tile conversion.
-				if( mapConvert[x,y] == Tile.TileType.OuterWall1 )
+				if( mapConvert[x,y].property == TileType.OuterWall1 )
 					instantiateMe = wallTile;
-				else if ( mapConvert[x,y] == Tile.TileType.Floor1 )
+				else if ( mapConvert[x,y].property == TileType.Floor1 )
 					instantiateMe = floorTile;
-				else if ( mapConvert[x,y] == Tile.TileType.Door1 )
+				else if ( mapConvert[x,y].property == TileType.Door1 )
 					instantiateMe = doorTile;
 				else
 					instantiateMe = pillarTile;
@@ -99,6 +99,7 @@ public class RoomManager : MonoBehaviour {
 		// CellularAutomata foo = new CellularAutomata(rows, columns);
 		//PureRandom foo = new PureRandom(rows, columns);
 		GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
+		selectedRule.initializeMap ();
 		selectedRule.generateMap ();
 		Tile[,] mapConvert = selectedRule.map;
 
@@ -112,7 +113,7 @@ public class RoomManager : MonoBehaviour {
 			candidX = Random.Range(0, rows);
 			candidY = Random.Range(0, columns); 
 			Tile[,] candidMap = selectedRule.map;
-			if(candidMap[candidX,candidY] == Tile.TileType.Floor1) {
+			if(candidMap[candidX,candidY].property == TileType.Floor1) {
 				GameObject instantiateMe;
 				if(Random.Range (0,2) == 0)
 					instantiateMe = wiggles;
@@ -131,7 +132,7 @@ public class RoomManager : MonoBehaviour {
 			int candidX = Random.Range(0, rows);
 			int candidY = Random.Range(0, columns); 
 			Tile[,] candidMap = selectedRule.map;
-			if(candidMap[candidX,candidY] == Tile.Floor1) {
+			if((candidMap[candidX,candidY]).property == TileType.Floor1) {
 				// We need to move the player to this position.
 				Vector3 moveMe = new Vector3(candidX, candidY);
 				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");

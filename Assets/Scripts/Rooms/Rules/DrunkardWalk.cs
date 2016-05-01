@@ -39,4 +39,9 @@ public class DrunkardWalk : BaseRuleset {
 	
 	}
 
+	public override void initializeMap(){
+		for(int i = 0; i < row; i++)
+			for(int j = 0; j < col; j++) 
+				map[i,j] = new Tile();
+	}
 }
