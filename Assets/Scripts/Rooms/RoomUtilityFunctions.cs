@@ -32,6 +32,12 @@ public class TileFunctions {
 public class MapValidationFunctions {
 	public Boolean clearable = false;
 
+	// TODO:
+	// The floodfill check should not be a part of a ruleset, but
+	// actually its own unique phase inside board Setup or some other aspect.
+	//
+	// If we have the time, we should separate these. But for now, prioritize
+	// having flood fill work in general first.
 	public void warpPlayer(Tile[,] map, int rows, int columns) {
 
 		while(true){
