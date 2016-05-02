@@ -39,10 +39,18 @@ public class RoomManager : MonoBehaviour {
 	public int rows = 8;
 	public int columns = 8;
 	public Rulesets rulesetToGenerate;
+	public TilesetType tilesetToGenerate;
+
 	private BaseRuleset selectedRule;
 	private RuleManager ruleMan;
+	private Tileset selectedTileset;
+	private TilesetManager tileMan;
+
 	private int candidX;
 	private int candidY;
+
+	// Sigh
+	public GameObject tilesetToUse;
 
 	// Some dummy tiles
 	// TODO: Cleaner implementation of conversion between
@@ -61,8 +69,13 @@ public class RoomManager : MonoBehaviour {
 
 	public void Start() {
 		ruleMan = new RuleManager();
+		//tileMan = new TilesetManager();
+
+		//selectedTileset = tileMan.getTileset(tilesetToGenerate);
+
 		selectedRule = ruleMan.getRule(rulesetToGenerate); // Default upon startup unless...
 		selectedRule.setRowCol (rows, columns);
+
 		boardSetup ();
 
 		// For our dummy case, we can set up some enemy characters
@@ -108,7 +121,16 @@ public class RoomManager : MonoBehaviour {
 		selectedRule.generateMap ();
 		Tile[,] mapConvert = selectedRule.map;
 
-		convertTiles( mapConvert );
+
+		// This is the autotiler phase.
+		//
+		// Let's try this method of instantiating the prefab of our choice...
+		GameObject schoolInstance = Instantiate(tilesetToUse, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+
+		selectedTileset = schoolInstance.GetComponent<TilesetSchool>();
+		selectedTileset.autoTiler( mapConvert ); 
+
+		//convertTiles( mapConvert );
 
 	}
 

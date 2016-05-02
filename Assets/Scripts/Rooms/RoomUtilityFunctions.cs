@@ -44,7 +44,9 @@ public class MapValidationFunctions {
 		int columns = map.GetLength (1);
 		if(target.isOOB (rows,columns,Direction.Stop)) return true;
 
-		return ( map[target.x, target.y].property > 0 );
+		//Debug.Log (map[target.x, target.y].property);
+
+		return ( map[target.x, target.y].property != TileType.Floor1 );
 	}
 
 	// TODO:

@@ -34,8 +34,8 @@ public class Coord {
 	public int y { get; set; }
 
 	public Coord(int a = 0, int b = 0) {
-		x = 0;
-		y = 0;
+		x = a;
+		y = b;
 	}
 
 	public Coord nextCoord(Direction d) {
