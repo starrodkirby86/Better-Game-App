@@ -55,6 +55,14 @@ public class Coord {
 		}
 	}
 
+	public Coord crossCoord(Direction d1, Direction d2){
+		// Returns a new coordinate based on two given directions.
+		// Basically, this allows you to write NW, NE, SW, SE
+		// if you really wanted to.
+		// If you're silly, you can also do things like NS or something...
+		return (nextCoord (d1)).nextCoord (d2);
+	}
+
 	public bool isOOB(int r, int c, Direction d) {
 		// Checks when given the direction and the upper limits
 		// of the map, would this result in going out of bounds?

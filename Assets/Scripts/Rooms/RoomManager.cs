@@ -73,6 +73,7 @@ public class RoomManager : MonoBehaviour {
 		//dummyPlayerSetup();
 	}
 
+	// Autotiler will be kind of built upon this.
 	public void convertTiles( Tile[,] mapConvert ) {
 		for(int x = 0; x < rows; x++) {
 			for(int y = 0; y < columns; y++) {
