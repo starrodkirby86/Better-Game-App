@@ -59,7 +59,7 @@ public class PureRandom : BaseRuleset {
 		}
 
 		// Warp.
-		mapValidFuncs.warpPlayer(map, row, col);
+		mapValidFuncs.warpPlayer(map);
 
 		// Print the map.
 		for(int i = 0; i < row; i++)

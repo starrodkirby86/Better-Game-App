@@ -24,7 +24,8 @@ public enum Direction {
 	North,
 	West,
 	South,
-	East
+	East,
+	Stop
 };
 
 public class Coord {

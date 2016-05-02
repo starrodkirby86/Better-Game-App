@@ -16,9 +16,14 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
-public abstract class Tileset : MonoBehaviour {
+public class Tileset : MonoBehaviour {
+
+	// N - NW - W - SW - S - SE - E - NE
+	Dictionary<int,GameObject> tileDictionary = new Dictionary<int, GameObject>();
+	MapValidationFunctions mvf = new MapValidationFunctions();
 
 	// The floor
 	public GameObject[] floorTile;
@@ -32,5 +37,17 @@ public abstract class Tileset : MonoBehaviour {
 	// The stairs
 	public GameObject[] stairTiles;
 
-	public abstract void autoTiler(Tile[,] map);
+	public virtual void autoTiler(Tile[,] map){}
+
+	/**
+	 * Generates a hexadecimal key corresponding its surroundings.
+	 * This should yield back the appropriate key that can be used for the tileDictionary,
+	 * which can then correspond with placing the appropriate graphic.
+	 */
+	public int makeKey(Tile[,] map, Coord target) {
+		int key = 0;
+
+		//if( mvf.isSolid (map, 
+		return key;
+	}
 }
