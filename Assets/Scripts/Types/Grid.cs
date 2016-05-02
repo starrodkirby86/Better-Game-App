@@ -33,7 +33,7 @@ public class Coord {
 	public int x { get; set; }
 	public int y { get; set; }
 
-	public Coord(int a = 0, int b = 0) {
+	public Coord(int a, int b) {
 		x = a;
 		y = b;
 	}
