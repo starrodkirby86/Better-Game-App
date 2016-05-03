@@ -13,16 +13,16 @@ using System.Collections;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class Nazareth : BaseRuleset {
+public class MoistLucifer : BaseRuleset {
 
-	public Nazareth() {
+	public MoistLucifer() {
 		row = 8;
 		col = 8;
 		map = new Tile[row,col];
 		mapValidFuncs = new MapValidationFunctions();
 	}
 
-	public Nazareth(int r, int c) {
+	public MoistLucifer(int r, int c) {
 		row = 16;
 		col = 16;
 		map = new Tile[row,col];
@@ -47,8 +47,8 @@ public class Nazareth : BaseRuleset {
 		map[10,9].property = TileType.OuterWall1;
 		map[10,7].property = TileType.OuterWall1;
 
-		for(int i = 3; i < 5; i++)
-			for(int j = 5; j < 8; j++)
+		for(int i = 6; i < 9; i++)
+			for(int j = 3; j < 8; j++)
 				map[i,j].property = TileType.OuterWall1;
 
 		// Also fill the corner wall tiles as walls
