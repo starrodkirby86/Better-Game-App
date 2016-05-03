@@ -72,11 +72,14 @@ public class Tileset : MonoBehaviour {
 		if( mvf.isSolid (map, target.nextCoord (Direction.West)) ) {
 			key += 0x20;
 		}
-
+			
 		// EAST
 		if( mvf.isSolid (map, target.nextCoord (Direction.East)) ) {
 			key += 0x02;
 		}
+
+		Debug.Log ("Given coord (" + target.x.ToString () + "," + target.y.ToString() + "), key is " + key.ToString ("X2"));
+
 		return key;
 	}
 

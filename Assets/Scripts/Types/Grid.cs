@@ -43,11 +43,11 @@ public class Coord {
 		// This does NOT overwrite the existing coordinate item.
 	switch(d) {
 			case Direction.North:
-				return new Coord(x,y-1);
+				return new Coord(x,y+1);
 			case Direction.West:
 				return new Coord(x-1,y);
 			case Direction.South:
-				return new Coord(x,y+1);
+				return new Coord(x,y-1);
 			case Direction.East:
 				return new Coord(x+1,y);
 			default:

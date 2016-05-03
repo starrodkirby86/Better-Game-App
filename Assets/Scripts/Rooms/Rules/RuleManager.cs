@@ -23,6 +23,7 @@ public class RuleManager
 		rulesetDictionary.Add (counter++, new PureRandom());
 		rulesetDictionary.Add (counter++, new CellularAutomata());
 		rulesetDictionary.Add (counter++, new SemiRandom());
+		rulesetDictionary.Add (counter++, new Nazareth());
 	}
 
 	public BaseRuleset getRule(Rulesets r) {
@@ -33,5 +34,6 @@ public class RuleManager
 public enum Rulesets {
 	PureRandom,
 	CellularAutomata,
-	SemiRandom
+	SemiRandom,
+	Nazareth
 };

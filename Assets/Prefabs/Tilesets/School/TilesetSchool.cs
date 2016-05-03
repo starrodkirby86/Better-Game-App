@@ -37,7 +37,14 @@ public class TilesetSchool : Tileset {
 					// So this is supposedly a wall tile based on what
 					// our ruleset has generated. Now it's time to convert
 					// that to the proper autotiled item.
-					instantiateMe = tileDictionary[ makeKey (map, new Coord(x,y)) ];
+					instantiateMe = tileDictionary [ 0xFF ];
+
+					int candidate = makeKey (map, new Coord(x,y));
+
+					if(! tileDictionary.TryGetValue (candidate, out instantiateMe ) ) {
+						Debug.Log ("Fringe case!");
+						instantiateMe = tileDictionary [ 0xFF ];
+					}
 				}
 				else if ( map[x,y].property == TileType.Floor1 ) {
 					// We can make this either a regular floor or a
@@ -51,7 +58,7 @@ public class TilesetSchool : Tileset {
 					instantiateMe = doorTile[0];
 				}
 				else {
-					instantiateMe = tileDictionary[ makeKey (map, new Coord(x,y)) ];
+					instantiateMe = tileDictionary[ 0xFF ];
 				}
 				
 				GameObject instance = Instantiate(instantiateMe, new Vector3 (x, y, 0), Quaternion.identity) as GameObject;

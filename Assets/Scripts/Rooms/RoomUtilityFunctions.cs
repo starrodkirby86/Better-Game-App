@@ -42,11 +42,13 @@ public class MapValidationFunctions {
 	public bool isSolid(Tile[,] map, Coord target) {
 		int rows = map.GetLength (0);
 		int columns = map.GetLength (1);
+
 		if(target.isOOB (rows,columns,Direction.Stop)) return true;
 
 		//Debug.Log (map[target.x, target.y].property);
 
-		return ( map[target.x, target.y].property != TileType.Floor1 );
+
+		return ( map[target.x, target.y].property == TileType.OuterWall1 );
 	}
 
 	// TODO:
