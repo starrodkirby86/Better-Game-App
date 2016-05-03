@@ -69,8 +69,20 @@ public class MoistLucifer : BaseRuleset {
         map[6, 11].property = TileType.OuterWall1;
         map[5, 8].property = TileType.OuterWall1;
 
+        map[9, 3].property = TileType.OuterWall1;
+        map[9, 4].property = TileType.OuterWall1;
+        //map[9, 2].property = TileType.OuterWall1;
+        map[11, 3].property = TileType.OuterWall1;
+        map[11, 4].property = TileType.OuterWall1;
+        map[11, 2].property = TileType.OuterWall1;
+        map[10, 2].property = TileType.OuterWall1;
+        map[10, 4].property = TileType.OuterWall1;
+        map[9, 5].property = TileType.OuterWall1;
+        map[10, 5].property = TileType.OuterWall1;
+        //map[11, 5].property = TileType.OuterWall1;
 
-        for (int i = 6; i < 8; i++)
+
+        for (int i = 6; i < 6; i++)
 			for(int j = 3; j < 4; j++)
 				map[i,j].property = TileType.OuterWall1;
 
