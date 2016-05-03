@@ -78,7 +78,7 @@ public class Tileset : MonoBehaviour {
 			key += 0x02;
 		}
 
-		Debug.Log ("Given coord (" + target.x.ToString () + "," + target.y.ToString() + "), key is " + key.ToString ("X2"));
+		//Debug.Log ("Given coord (" + target.x.ToString () + "," + target.y.ToString() + "), key is " + key.ToString ("X2"));
 
 		return key;
 	}

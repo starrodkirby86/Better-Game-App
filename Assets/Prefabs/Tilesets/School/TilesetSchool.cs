@@ -22,7 +22,7 @@ public class TilesetSchool : Tileset {
 	public override void autoTiler(Tile[,] map) {
 		// This is where we'll try to implement Colin's autotiling algorithm
 		// A 0 == floor
-		// A nonzero is a wall 
+		// A nonzero is a wall
 
 		fillDictionary();
 
@@ -42,7 +42,7 @@ public class TilesetSchool : Tileset {
 					int candidate = makeKey (map, new Coord(x,y));
 
 					if(! tileDictionary.TryGetValue (candidate, out instantiateMe ) ) {
-						Debug.Log ("Fringe case!");
+						Debug.Log ("Fringe case at " + candidate.ToString ("X2"));
 						instantiateMe = tileDictionary [ 0xFF ];
 					}
 				}
@@ -60,7 +60,7 @@ public class TilesetSchool : Tileset {
 				else {
 					instantiateMe = tileDictionary[ 0xFF ];
 				}
-				
+
 				GameObject instance = Instantiate(instantiateMe, new Vector3 (x, y, 0), Quaternion.identity) as GameObject;
 				instance.transform.SetParent(this.transform);
 			}
@@ -80,7 +80,7 @@ public class TilesetSchool : Tileset {
 		tileDictionary.Add (0xFB,wallTiles[4]);
 		tileDictionary.Add (0xEF,wallTiles[5]);
 		tileDictionary.Add (0xBE,wallTiles[6]);
-		tileDictionary.Add (0xEA,wallTiles[7]);
+		tileDictionary.Add (0xFA,wallTiles[7]);
 		tileDictionary.Add (0xA8,wallTiles[8]);
 		tileDictionary.Add (0xE8,wallTiles[9]);
 		tileDictionary.Add (0x8F,wallTiles[10]);
@@ -110,8 +110,8 @@ public class TilesetSchool : Tileset {
 		tileDictionary.Add (0x00,wallTiles[33-1]); // 32
 		tileDictionary.Add (0x82,wallTiles[34-1]); // 33
 		tileDictionary.Add (0xA0,wallTiles[35-1]); // 34
-		tileDictionary.Add (0x24,wallTiles[36-1]); // 35
-		tileDictionary.Add (0xAB,wallTiles[37-1]); // 30
+		tileDictionary.Add (0xAB,wallTiles[36-1]); // 35
+		tileDictionary.Add (0xEA,wallTiles[37-1]); // 36
 		// the last two
 		// tiles are floors
 	}
