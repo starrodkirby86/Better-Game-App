@@ -8,6 +8,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Text;
 
 public class RandomPassage : MonoBehaviour {
 
@@ -44,15 +45,25 @@ public class RandomPassage : MonoBehaviour {
 	public void replaceTokensInSentences() {
 		// CODE HERE
 		TextAsset passageline = Resources.Load ("Passages/passages/" + sentences) as TextAsset;
-		string[] fullpassage = passageline.text.Split ('\n');
-		for (int x = 0; x < fullpassage.Length; x++) {
-			if (fullpassage[x] == "$$PPL$$") {
+		string newpassage = passageline.text;
+		string[] stringSeparators = new string[] { "$$" };
+		string[] fullpassage = newpassage.Split(stringSeparators, System.StringSplitOptions.None); 
+		for (int x = 0; x < fullpassage.Length; x++)
+		{
+			if (fullpassage[x] == "PPL")
+			{
 				fullpassage[x] = getRandomPerson();
-			} else if (fullpassage[x] == "$$ACT$$") {
-				fullpassage [x] = getRandomAction();
 			}
-		}
+			else if (fullpassage[x] == "ACT")
+			{
+				fullpassage[x] = getRandomAction();
+			}
 
+		}
+		for (int x = 0; x < fullpassage.Length; x++)
+		{
+			System.Console.Write(fullpassage[x]);
+		}
 	}
 
 	public string getRandomPerson() {
