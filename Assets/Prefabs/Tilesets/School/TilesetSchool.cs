@@ -114,5 +114,18 @@ public class TilesetSchool : Tileset {
 		tileDictionary.Add (0xEA,wallTiles[37-1]); // 36
 		// the last two
 		// tiles are floors
+		// Missing case tiles -- I'll also subtract according to the dictionary
+		tileDictionary.Add (0xBB,wallTiles[40-3]); // 37
+		tileDictionary.Add (0xEE,wallTiles[41-3]); // 38
+		tileDictionary.Add (0xA2,wallTiles[42-3]); // 39
+		tileDictionary.Add (0x8E,wallTiles[43-3]); // 40
+		tileDictionary.Add (0xB8,wallTiles[44-3]); // 41
+		tileDictionary.Add (0x2E,wallTiles[45-3]); // 42
+		tileDictionary.Add (0x3A,wallTiles[46-3]); // 43
+		tileDictionary.Add (0x2A,wallTiles[52-8]); // 44
+		//tileDictionary.Add (0x8B,wallTiles[53-8]); // 45
+		//tileDictionary.Add (0xE8,wallTiles[54-8]); // 46
+		tileDictionary.Add (0xA3,wallTiles[55-8]); // 47
+		tileDictionary.Add (0xE2,wallTiles[56-8]); // 48
 	}
 }
