@@ -41,7 +41,7 @@ public class MoistLucifer : BaseRuleset {
 		// Step 1: Fill the map randomly based on MAX walls
 
 		Debug.Log ("Step 1");
-
+        // I
 		map[10,8].property = TileType.OuterWall1;
 		map[9,8].property = TileType.OuterWall1;
 		map[10,9].property = TileType.OuterWall1;
@@ -56,6 +56,7 @@ public class MoistLucifer : BaseRuleset {
         map[9, 7].property = TileType.OuterWall1;
         map[9, 10].property = TileType.OuterWall1;
 
+        // H
         map[4, 7].property = TileType.OuterWall1;
         map[6, 9].property = TileType.OuterWall1;
         map[6, 7].property = TileType.OuterWall1;
@@ -68,6 +69,9 @@ public class MoistLucifer : BaseRuleset {
         map[5, 9].property = TileType.OuterWall1;
         map[6, 11].property = TileType.OuterWall1;
         map[5, 8].property = TileType.OuterWall1;
+        map[6, 12].property = TileType.OuterWall1;
+        map[7, 12].property = TileType.OuterWall1;
+        map[7, 11].property = TileType.OuterWall1;
 
         map[9, 3].property = TileType.OuterWall1;
         map[9, 4].property = TileType.OuterWall1;
