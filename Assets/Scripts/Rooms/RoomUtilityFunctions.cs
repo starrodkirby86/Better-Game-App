@@ -26,11 +26,30 @@ public class TileFunctions {
 /**
  * Functions that help verify aspects of a map to 
  * help ensure that the map made is a "good" one.
- * -> DFS
- * -> Floodfill a particular point and return the area
+ * LIST OF FUNCS:
+ * -> isSolid
+ * -> warpPlayer
+ * -> FloodfillCheck
  */
 public class MapValidationFunctions {
 	public Boolean clearable = false;
+
+
+	/**
+	 *  isSolid is a boolean function that checks
+	 *  if a tile is on top of a "wall" or is OOB.
+	 */
+	public bool isSolid(Tile[,] map, Coord target) {
+		int rows = map.GetLength (0);
+		int columns = map.GetLength (1);
+
+		if(target.isOOB (rows,columns,Direction.Stop)) return true;
+
+		//Debug.Log (map[target.x, target.y].property);
+
+
+		return ( map[target.x, target.y].property == TileType.OuterWall1 );
+	}
 
 	// TODO:
 	// The floodfill check should not be a part of a ruleset, but
@@ -38,7 +57,10 @@ public class MapValidationFunctions {
 	//
 	// If we have the time, we should separate these. But for now, prioritize
 	// having flood fill work in general first.
-	public void warpPlayer(Tile[,] map, int rows, int columns) {
+	public void warpPlayer(Tile[,] map) {
+
+		int rows = map.GetLength (0);
+		int columns = map.GetLength (1);
 
 		while(true){
 			int candidX = Random.Range(0, rows);

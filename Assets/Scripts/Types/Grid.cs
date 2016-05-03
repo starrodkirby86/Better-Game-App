@@ -24,7 +24,8 @@ public enum Direction {
 	North,
 	West,
 	South,
-	East
+	East,
+	Stop
 };
 
 public class Coord {
@@ -32,9 +33,9 @@ public class Coord {
 	public int x { get; set; }
 	public int y { get; set; }
 
-	public Coord(int a = 0, int b = 0) {
-		x = 0;
-		y = 0;
+	public Coord(int a, int b) {
+		x = a;
+		y = b;
 	}
 
 	public Coord nextCoord(Direction d) {
@@ -42,16 +43,24 @@ public class Coord {
 		// This does NOT overwrite the existing coordinate item.
 	switch(d) {
 			case Direction.North:
-				return new Coord(x,y-1);
+				return new Coord(x,y+1);
 			case Direction.West:
 				return new Coord(x-1,y);
 			case Direction.South:
-				return new Coord(x,y+1);
+				return new Coord(x,y-1);
 			case Direction.East:
 				return new Coord(x+1,y);
 			default:
 				return new Coord(x,y);
 		}
+	}
+
+	public Coord crossCoord(Direction d1, Direction d2){
+		// Returns a new coordinate based on two given directions.
+		// Basically, this allows you to write NW, NE, SW, SE
+		// if you really wanted to.
+		// If you're silly, you can also do things like NS or something...
+		return (nextCoord (d1)).nextCoord (d2);
 	}
 
 	public bool isOOB(int r, int c, Direction d) {

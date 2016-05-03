@@ -58,7 +58,7 @@ protected override void Start()
     {
         base.AttemptMove<T>(xDir, yDir);
 
-        RaycastHit2D hit;
+        //RaycastHit2D hit;
         //CheckIfGameOver();
         GameManager.instance.playersTurn = false;
 		return;
