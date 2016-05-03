@@ -46,9 +46,32 @@ public class MoistLucifer : BaseRuleset {
 		map[9,8].property = TileType.OuterWall1;
 		map[10,9].property = TileType.OuterWall1;
 		map[10,7].property = TileType.OuterWall1;
+        map[11, 7].property = TileType.OuterWall1;
+        map[11, 8].property = TileType.OuterWall1;
+        map[11, 10].property = TileType.OuterWall1;
+        map[11, 11].property = TileType.OuterWall1;
+        map[10, 10].property = TileType.OuterWall1;
+        map[10, 11].property = TileType.OuterWall1;
+        map[9, 11].property = TileType.OuterWall1;
+        map[9, 7].property = TileType.OuterWall1;
+        map[9, 10].property = TileType.OuterWall1;
 
-		for(int i = 6; i < 9; i++)
-			for(int j = 3; j < 8; j++)
+        map[4, 7].property = TileType.OuterWall1;
+        map[6, 9].property = TileType.OuterWall1;
+        map[6, 7].property = TileType.OuterWall1;
+        map[6, 8].property = TileType.OuterWall1;
+        map[6, 10].property = TileType.OuterWall1;
+        map[4, 11].property = TileType.OuterWall1;
+        map[4, 10].property = TileType.OuterWall1;
+        map[4, 9].property = TileType.OuterWall1;
+        map[4, 8].property = TileType.OuterWall1;
+        map[5, 9].property = TileType.OuterWall1;
+        map[6, 11].property = TileType.OuterWall1;
+        map[5, 8].property = TileType.OuterWall1;
+
+
+        for (int i = 6; i < 8; i++)
+			for(int j = 3; j < 4; j++)
 				map[i,j].property = TileType.OuterWall1;
 
 		// Also fill the corner wall tiles as walls
