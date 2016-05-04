@@ -73,6 +73,5 @@ public class RandomPassage : MonoBehaviour {
 	public string getRandomAction() {
 		return "bar";
 	}
-
-
+		
 }
