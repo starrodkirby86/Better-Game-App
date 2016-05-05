@@ -52,6 +52,7 @@ public class RoomManager : MonoBehaviour {
 	// Sigh
 	public GameObject tilesetToUse;
 
+	/*
 	// Some dummy tiles
 	// TODO: Cleaner implementation of conversion between
 	// Tile enumerator and the corresponding tiles.
@@ -59,8 +60,10 @@ public class RoomManager : MonoBehaviour {
 	public GameObject wallTile;
 	public GameObject doorTile;
 	public GameObject pillarTile;
+	*/
 
 	// ENEMIES
+	public int spawnCount;
 	public GameObject jiggles;
 	public GameObject wiggles;
 
@@ -86,6 +89,7 @@ public class RoomManager : MonoBehaviour {
 		//dummyPlayerSetup();
 	}
 
+	/*
 	// Autotiler will be kind of built upon this.
 	public void convertTiles( Tile[,] mapConvert ) {
 		for(int x = 0; x < rows; x++) {
@@ -108,6 +112,7 @@ public class RoomManager : MonoBehaviour {
 			}
 		}
 	}
+	*/
 
 	public void boardSetup() {
 
@@ -136,7 +141,7 @@ public class RoomManager : MonoBehaviour {
 
 	public void dummyEnemySetup(){
 		int enemyCount = 0;
-		while(enemyCount < 8) {
+		while(enemyCount < spawnCount) {
 			candidX = Random.Range(0, rows);
 			candidY = Random.Range(0, columns); 
 			Tile[,] candidMap = selectedRule.map;

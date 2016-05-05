@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameManager : MonoBehaviour {
 
-	public float turnDelay = .1f;
+	public float turnDelay = .05f;
 	public static GameManager instance = null;
     private RoomManager roomScript;
 
@@ -59,6 +59,12 @@ public class GameManager : MonoBehaviour {
 		enemies.Add(script);
 	}
 
+	public void DetachEnemyFromList(Enemy removeMe)
+	{
+		// Removes a certain enemy from the list.
+		enemies.Remove (removeMe);
+	}
+
 	IEnumerator MoveEnemies()
 	{
 		enemiesMoving = true;
@@ -77,5 +83,17 @@ public class GameManager : MonoBehaviour {
 		playersTurn = true;
 
 		enemiesMoving = false;
+	}
+
+	IEnumerator DamageEnemies(int damage)
+	{
+		for(int i = 0; i < enemies.Count; i++)
+			enemies[i].loseHealth(damage);
+
+		yield return new WaitForSeconds(turnDelay);
+	}
+
+	public List<Enemy> getListOfEnemies() {
+		return enemies;
 	}
 }

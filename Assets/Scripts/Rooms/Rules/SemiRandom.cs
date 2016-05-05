@@ -59,7 +59,7 @@ public class SemiRandom : BaseRuleset {
 		for(int i = 1; i < row-1; i++)
 			for(int j = 1; j < col-1; j++)
 				if (j != 0 || i != 0 || j != (col-1) || i != (row-1)) {
-					map[i,j].property = ( Random.Range(0, 100) < 85 ) ? TileType.Floor1 : TileType.Pillar1;
+					map[i,j].property = ( Random.Range(0, 100) < 85 ) ? TileType.Floor1 : TileType.OuterWall1;
 				}
 
 		int doororstair = ( Random.Range(0, 100) < 50 ) ? 0 : 1;

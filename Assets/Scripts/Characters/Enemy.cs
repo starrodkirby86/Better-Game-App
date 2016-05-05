@@ -83,4 +83,12 @@ public class Enemy : Movement
 		Slider UIBar = enemyHPBar.GetComponent<Slider>();
 		UIBar.value = enemyStats.enemyCurrentHP;
 	}
+
+	public void loseHealth(int loss) {
+		enemyStats.enemyCurrentHP -= loss;
+		if(enemyStats.enemyCurrentHP <= 0) {
+			GameManager.instance.DetachEnemyFromList(this);
+			Destroy (this.transform.gameObject);
+		}
+	}
 }
