@@ -22,7 +22,7 @@ public class BossRoomManager : MonoBehaviour {
 	public Rulesets rulesetToGenerate;
 	private TilesetType tilesetToGenerate;
 
-	private BaseRuleset selectedRule;
+	public BaseRuleset selectedRule;
 	private RuleManager ruleMan;
 	private Tileset selectedTileset;
 	private TilesetManager tileMan;

@@ -32,7 +32,7 @@ public class EvilDamage : MonoBehaviour {
 		    myPlace.isEqual (s) ||
 		    myPlace.isEqual (e) ) {
 			PlayerMovement hitPlayer = player.GetComponent<PlayerMovement>();
-			supportive.PlayOneShot(haha);
+			supportive.PlayOneShot(haha,1f);
 			hitPlayer.LoseHealth(750); }
 
 		Destroy (this.gameObject, 3);

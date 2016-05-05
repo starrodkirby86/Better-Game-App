@@ -9,10 +9,10 @@ using System.Collections;
 public class Enemy : Movement
 {
     public int playerDamage = 500;
-	EnemyStats enemyStats;
-    private Animator animator;
-    private Transform target;
-    private bool skipMove;
+	protected EnemyStats enemyStats;
+    protected Animator animator;
+    protected Transform target;
+    protected bool skipMove;
 	
 	public GameObject enemyCanvas;
 	//private Slider enemyHPBar;
@@ -39,7 +39,7 @@ public class Enemy : Movement
         skipMove = true;
     }
 
-    public void MoveEnemy()
+    public virtual void MoveEnemy()
     {
         int xDir = 0;
         int yDir = 0;
@@ -65,7 +65,7 @@ public class Enemy : Movement
 		updateUI ();
 	}
 	
-	public void makeUI() {
+	public virtual void makeUI() {
 
 		GameObject newCanvas = Instantiate( enemyCanvas, new Vector3(0,0,0), Quaternion.identity ) as GameObject;
 		newCanvas.transform.SetParent (this.gameObject.transform, false);
@@ -78,14 +78,14 @@ public class Enemy : Movement
 		UIBar.value = enemyStats.enemyCurrentHP;
 	}
 
-	public void updateUI() {
+	public virtual void updateUI() {
 		GameObject thisCanvas = this.transform.GetChild(0).gameObject; // The first child of the enemy should be the enemy canvas
 		GameObject enemyHPBar = thisCanvas.transform.GetChild(1).gameObject;
 		Slider UIBar = enemyHPBar.GetComponent<Slider>();
 		UIBar.value = enemyStats.enemyCurrentHP;
 	}
 
-	public void loseHealth(int loss) {
+	public virtual void loseHealth(int loss) {
 		enemyStats.enemyCurrentHP -= loss;
 		if(enemyStats.enemyCurrentHP <= 0) {
 			GameManager.instance.DetachEnemyFromList(this);
