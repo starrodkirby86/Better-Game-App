@@ -1,14 +1,4 @@
-﻿/**
- * CeullarAutomata.cs
- * Generation rule for a cellular automata algorithm.
- * Derived from BaseRuleset
- */
-
-// TODO:
-// REFACTOR TO USE COORD TYPE???
-// MAY MAKE OOB COUNTING EASIER
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
 

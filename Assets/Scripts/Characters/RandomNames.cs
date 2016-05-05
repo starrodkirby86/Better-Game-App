@@ -43,6 +43,7 @@ public class RandomNames {
 		//Debug.Log ("NameLists/" + nameDb[(int)n]);
 		string[] lines = firstNameList.text.Split ('\n');
 		string firstName = lines[ Random.Range (0, lines.Length)];
+		return firstName;
 	}
 
 	// Initialization function. Basically, we can recognize the existence of txt files here.

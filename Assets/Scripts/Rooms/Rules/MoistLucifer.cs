@@ -1,6 +1,6 @@
 ﻿/**
- * CeullarAutomata.cs
- * Generation rule for a cellular automata algorithm.
+ * MoistLucifer.cs
+ * Test case.
  * Derived from BaseRuleset
  */
 

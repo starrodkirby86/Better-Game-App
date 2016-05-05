@@ -84,6 +84,6 @@ public class RandomPassage : MonoBehaviour {
 
 	public void fillPassage() {
 		int counter = 0;
-		sentences.Add (counter++, "passages");
+		sentences.Add ("passages");
 	}
 }
