@@ -9,6 +9,7 @@ in this script */
 public class PlayerMovement : Movement
 {
     public float restartLevelDelay = 0.5f;
+	public AudioClip ouchSound;
 	[SerializeField] PlayerStats playerStats;
     Animator animator;
     private int playerHealth;
@@ -87,7 +88,7 @@ protected override void Start()
         }
         else if (other.tag == "Enemy")
         {
-            // Add enemy encounter code
+			LoseHealth (200);
         }
     }
 
@@ -106,17 +107,19 @@ protected override void Start()
 
     public void LoseHealth(int loss)
     {
-        animator.SetTrigger("playerHit");
-        playerHealth -= loss;
+        //animator.SetTrigger("playerHit");
+		AudioSource source = GetComponent<AudioSource>();
+		source.PlayOneShot (ouchSound, 1);
+		setPlayerCurrentHP (playerStats.playerCurrentHP - loss);
         CheckIfGameOver();
     }
 
     // Checks if the game is over by constantly comparing the player health variable
     private void CheckIfGameOver()
     {
-        if (playerHealth <= 0)
+		if (playerStats.playerCurrentHP <= 0) {
 			Debug.Log ("Ass tits");
-            //GameManager.instance.GameOver();
+			GameManager.instance.GameOver(); }
     }
 
 	// Update UI
@@ -137,6 +140,10 @@ protected override void Start()
 
 	public int getPlayerCurrentMP() {
 		return playerStats.playerCurrentMP;
+	}
+
+	public void setPlayerCurrentHP(int newHP) {
+		playerStats.playerCurrentHP = newHP;
 	}
 
 	public void setPlayerCurrentMP(int newMP){

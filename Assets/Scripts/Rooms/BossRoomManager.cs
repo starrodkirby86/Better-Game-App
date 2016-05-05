@@ -1,29 +1,10 @@
 ﻿/**
- * RoomManager.cs
+ * BossRoomManager.cs
  * This handles the procedural generation of the level.
  * There are various implementations that we could approach:
  *
- * Generate a 2D Matrix of Ints.
- * --> This method takes a ruleset heuritsic for a map
- * 	   to generate certain tiles. When this method is
- *     complete, it will return a set of 2D Ints for
- *     the next process.
- *
- * Convert the 2D Matrix into walls/transformations.
- * --> You may wonder why we don't do this all the way.
- *     The main goal is to create our own ASCII or
- *     manual datasets for rooms that we can import into
- *     the room instead.
- *
- * Decide whether to randomize or hard-code foreground sprites.
- * --> How will enemies, items, or things like that be
- *     organized? There should be a master rulebook to
- *     control gaming difficulty.
- *
- * ROOM GENERATION
- * 	Decide what algorithm we want to use. Maybe we want to use...
- * 		-> Growing Tree Algorithm
- * 		-> Cellular Automata
+ * Special Dr. Liu magic.
+ * 
  */
 
 
@@ -33,7 +14,7 @@ using System.Collections.Generic;		// To use lists.
 using Random = UnityEngine.Random;		// Unity Random
 
 
-public class RoomManager : MonoBehaviour {
+public class BossRoomManager : MonoBehaviour {
 
 	// SOME HARD VAULES FOR TEMPORARY MEASURE
 	public int rows = 8;
@@ -64,8 +45,7 @@ public class RoomManager : MonoBehaviour {
 
 	// ENEMIES
 	public int spawnCount;
-	public GameObject jiggles;
-	public GameObject wiggles;
+	public GameObject trueEvil;
 
 	// SOME PRIVATES HAHAHA
 	private Transform boardHolder; // Holds up all the tile objects
@@ -81,13 +61,9 @@ public class RoomManager : MonoBehaviour {
 
 		boardSetup ();
 
-		// For our dummy case, we can set up some enemy characters
-		// So wiggles and jiggles I guess
-		dummyEnemySetup();
+		bossEnemySetup();
 
-		Coord playerLocation = MapValidationFunctions.warpPlayer (selectedRule.map);
-
-		pickWarpLocation(playerLocation);
+		pickWarpLocation();
 
 		// And we may as well do a player one too. What the hey.
 		//dummyPlayerSetup();
@@ -143,23 +119,8 @@ public class RoomManager : MonoBehaviour {
 
 	}
 
-	public void dummyEnemySetup(){
-		int enemyCount = 0;
-		while(enemyCount < spawnCount) {
-			candidX = Random.Range(0, rows);
-			candidY = Random.Range(0, columns); 
-			Tile[,] candidMap = selectedRule.map;
-			if(candidMap[candidX,candidY].property == TileType.Floor1) {
-				GameObject instantiateMe;
-				if(Random.Range (0,2) == 0)
-					instantiateMe = wiggles;
-				else
-					instantiateMe = jiggles;
-
-				GameObject instance = Instantiate (instantiateMe, new Vector3(candidX, candidY, 0), Quaternion.identity) as GameObject;
-				enemyCount++;
-			}
-		}
+	public void bossEnemySetup(){
+		GameObject instance = Instantiate (trueEvil, new Vector3(7, 8, 0), Quaternion.identity) as GameObject;
 	}
 
 	public Coord dummyPlayerSetup(){
@@ -180,31 +141,15 @@ public class RoomManager : MonoBehaviour {
 		}
 	}
 
-	public void pickWarpLocation(Coord playerLocation) {
+	public void pickWarpLocation() {
 		// GOOD LOC OK
 		int counter = 0;
 		MapValidationFunctions mvf = new MapValidationFunctions();
 		GameObject playerChar = GameObject.FindGameObjectWithTag ("Player");
-		int playerX = playerLocation.x;
-		int playerY = playerLocation.y;
-		while(true && counter < 100){
-			int candidX = Random.Range(1, rows-1);
-			int candidY = Random.Range(1, columns-1); 
-			Tile[,] candidMap = selectedRule.map;
-			mvf.FloodFillCheck( candidMap, new Coord(candidX, candidY), new Coord(playerX, playerY));
-			if((candidMap[candidX,candidY]).property == TileType.Floor1 && mvf.clearable ) {
-				// We need to move the player to this position.
-				Vector3 moveMe = new Vector3(candidX, candidY);
-				GameObject warpObj = GameObject.FindGameObjectWithTag("Warp");
-				warpObj.transform.position = moveMe;
-				return;
-			}
-			Debug.Log ("Failed for " + playerX.ToString () + " and " + playerY.ToString () + " to " + candidX.ToString () + " and " + candidY.ToString());
-			counter++;
-		}
-		Vector3 findme = new Vector3(0,0);
-		GameObject ok = GameObject.FindGameObjectWithTag("Warp");
-		ok.transform.position = findme;
+		Vector3 startloc = new Vector3 (7, 30, 0);
+		Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
+		rb2D.MovePosition(startloc);
+
 		return;
 	}
 }

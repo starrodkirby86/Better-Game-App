@@ -51,6 +51,7 @@ public class RandomNames {
 		int counter = 0;
 		firstNameDb.Add ( counter++, "firstNames" ); 
 		firstNameDb.Add ( counter++, "generic" );
+		firstNameDb.Add ( counter++, "csclass" );
 	}
 
 	public void fillLastNameDatabase() {
@@ -65,7 +66,8 @@ public class RandomNames {
  */
 public enum firstNameList {
 	firstNames,
-	generic
+	generic,
+	csci152
 };
 
 /**

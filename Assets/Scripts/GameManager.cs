@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour {
     // Initializes game over event to be false until determined true
     public void GameOver() {
         enabled = false;
+		AutoFade.LoadLevel ("title",2,1,Color.red);
     }
 	// Update is called once per frame
 	void Update () {

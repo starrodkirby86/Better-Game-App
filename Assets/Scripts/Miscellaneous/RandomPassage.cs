@@ -6,6 +6,8 @@
  * 
  */
 
+//using System;
+using UnityEngine.UI;
 using UnityEngine;
 using System.Collections;
 using System.Text;
@@ -27,8 +29,10 @@ public class RandomPassage : MonoBehaviour {
 	private static RandomNames randomNames;
 	public firstNameList firstNameOrigin;
 
-	public RandomPassage() {
-		fillPassage ();
+	public RandomPassage() {}
+
+	void Awake() {
+		updateTextUI();
 	}
 
 	/**
@@ -49,10 +53,10 @@ public class RandomPassage : MonoBehaviour {
 	 * Of course, it's a void function, so what this really does is overwrite the
 	 * item in the ArrayList sentences.
 	 */
-	public void replaceTokensInSentences() {
+	public string replaceTokensInSentences() {
 		// CODE HERE
-		TextAsset passageline = Resources.Load ("Passages/passages/" + sentences) as TextAsset;
-		string newpassage = passageline.text;
+		//TextAsset passageline = Resources.Load ("Passages/passages/" + sentences) as TextAsset;
+		string newpassage = getPassage();
 		string[] stringSeparators = new string[] { "$$" };
 		string[] fullpassage = newpassage.Split(stringSeparators, System.StringSplitOptions.None); 
 		for (int x = 0; x < fullpassage.Length; x++)
@@ -69,8 +73,10 @@ public class RandomPassage : MonoBehaviour {
 		}
 		for (int x = 0; x < fullpassage.Length; x++)
 		{
-			System.Console.Write(fullpassage[x]);
+			Debug.Log( fullpassage[x] );
 		}
+
+		return string.Join ("",fullpassage);
 	}
 
 	public string getRandomPerson() {
@@ -79,11 +85,19 @@ public class RandomPassage : MonoBehaviour {
 	}
 
 	public string getRandomAction() {
-		return "bar";
+		TextAsset activities = Resources.Load ("Passages/Activities/act") as TextAsset;
+		string[] lines = activities.text.Split ('\n');
+		return lines[ Random.Range (0, lines.Length)];
 	}
 
-	public void fillPassage() {
-		int counter = 0;
-		sentences.Add ("passages");
+	public string getPassage() {
+		TextAsset psg = Resources.Load ("Passages/passages") as TextAsset;
+		string[] lines = psg.text.Split ('\n');
+		return lines[ Random.Range (0, lines.Length)];
+	}
+
+	public void updateTextUI() {
+		Text UIText = this.transform.gameObject.GetComponent<Text>();
+		UIText.text = replaceTokensInSentences();
 	}
 }

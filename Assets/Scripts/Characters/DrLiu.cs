@@ -1,4 +1,11 @@
-﻿
+﻿/**
+ * 
+ * The ultimate class.
+ * Don't think about it too hard.
+ *
+ */
+
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -6,7 +13,7 @@ using System.Collections;
 // Enemy inherits from MovingObject, which is the base
 // class for objects that can move.
 [System.Serializable]
-public class Enemy : Movement
+public class DrLiu : Movement
 {
     public int playerDamage = 500;
 	EnemyStats enemyStats;
@@ -20,7 +27,6 @@ public class Enemy : Movement
     // Use this for initialization
     protected override void Start()
     {
-        GameManager.instance.AddEnemyToList(this);
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 		enemyStats = GetComponent<EnemyStats>();
@@ -88,7 +94,6 @@ public class Enemy : Movement
 	public void loseHealth(int loss) {
 		enemyStats.enemyCurrentHP -= loss;
 		if(enemyStats.enemyCurrentHP <= 0) {
-			GameManager.instance.DetachEnemyFromList(this);
 			Destroy (this.transform.gameObject);
 		}
 	}
