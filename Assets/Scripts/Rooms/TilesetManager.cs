@@ -22,6 +22,7 @@ public class TilesetManager
 	public void fillDatabase(){
 		var counter = 0;
 		tilesetDictionary.Add (counter++, new TilesetSchool());
+		tilesetDictionary.Add (counter++, new TilesetMoistLucifer());
 	}
 	
 	public Tileset getTileset(TilesetType t) {
@@ -30,5 +31,6 @@ public class TilesetManager
 }
 
 public enum TilesetType {
-	School
+	School,
+	MoistLucifer
 };

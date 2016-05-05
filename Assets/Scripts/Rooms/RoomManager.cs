@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour {
 	public int rows = 8;
 	public int columns = 8;
 	public Rulesets rulesetToGenerate;
-	public TilesetType tilesetToGenerate;
+	private TilesetType tilesetToGenerate;
 
 	private BaseRuleset selectedRule;
 	private RuleManager ruleMan;
@@ -125,9 +125,9 @@ public class RoomManager : MonoBehaviour {
 		// This is the autotiler phase.
 		//
 		// Let's try this method of instantiating the prefab of our choice...
-		GameObject schoolInstance = Instantiate(tilesetToUse, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+		GameObject tileInstance = Instantiate(tilesetToUse, new Vector3(0,0,0), Quaternion.identity) as GameObject;
 
-		selectedTileset = schoolInstance.GetComponent<TilesetSchool>();
+		selectedTileset = tileInstance.GetComponent<Tileset>();
 		selectedTileset.autoTiler( mapConvert ); 
 
 		//convertTiles( mapConvert );
