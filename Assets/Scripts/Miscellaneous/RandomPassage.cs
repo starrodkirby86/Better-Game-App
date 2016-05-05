@@ -11,7 +11,7 @@ using System.Collections;
 using System.Text;
 
 public class RandomPassage : MonoBehaviour {
-
+	
 	// These can be dynamically sized.
 	// For more information on an ArrayList, refer to
 	// https://msdn.microsoft.com/en-us/library/system.collections.arraylist(v=vs.110).aspx
@@ -23,6 +23,13 @@ public class RandomPassage : MonoBehaviour {
 	public const string d = "$$"; 		// delimiter
 	public const string pToken = "PPL";	// person token
 	public const string aToken = "ACT"; // action token
+
+	private static RandomNames randomNames;
+	public firstNameList firstNameOrigin;
+
+	public RandomPassage() {
+		fillPassage ();
+	}
 
 	/**
 	 * This function, for each sentence into the sentences arrayList, converts
@@ -67,11 +74,16 @@ public class RandomPassage : MonoBehaviour {
 	}
 
 	public string getRandomPerson() {
-		return "foo";
+		randomNames = new RandomNames();
+		return randomNames.getFirstName(firstNameOrigin);
 	}
 
 	public string getRandomAction() {
 		return "bar";
 	}
-		
+
+	public void fillPassage() {
+		int counter = 0;
+		sentences.Add (counter++, "passages");
+	}
 }

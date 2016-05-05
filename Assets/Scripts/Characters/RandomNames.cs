@@ -36,6 +36,15 @@ public class RandomNames {
 		return firstName + " " + lastName;
 	}
 
+	public string getFirstName(firstNameList m) {
+		// Based on the enumerator, we're going to pick a name from the txt file thrown at us.
+		// Randomly, of course. Because that's the beauty of it all.
+		TextAsset firstNameList = Resources.Load ("NameLists/firstNames/" + firstNameDb[(int)m]) as TextAsset;
+		//Debug.Log ("NameLists/" + nameDb[(int)n]);
+		string[] lines = firstNameList.text.Split ('\n');
+		string firstName = lines[ Random.Range (0, lines.Length)];
+	}
+
 	// Initialization function. Basically, we can recognize the existence of txt files here.
 	public void fillFirstNameDatabase() {
 		int counter = 0;
