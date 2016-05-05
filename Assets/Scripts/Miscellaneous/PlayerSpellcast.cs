@@ -25,6 +25,7 @@ public class PlayerSpellcast : MonoBehaviour {
 
 	// Decide range and damage
 	public int spellRadius;
+	public int spellCost;
 	public int spellDamage;
 
 	// Use this for initialization
@@ -39,6 +40,14 @@ public class PlayerSpellcast : MonoBehaviour {
 			// Do we have enough MP?
 			PlayerMovement thatsMe = GetComponent<PlayerMovement>();
 			if(thatsMe.getPlayerCurrentMP() > 0) {
+
+				int thatsMyMP = thatsMe.getPlayerCurrentMP();
+				thatsMyMP -= spellCost;
+
+				if(thatsMyMP < 0) thatsMyMP = 0;
+
+				thatsMe.setPlayerCurrentMP (thatsMyMP);
+
 				source.pitch = Random.Range (pitchLowRange, pitchHighRange);
 				float vol = Random.Range (volLowRange, volHighRange);
 				source.PlayOneShot(magicSound,vol);
@@ -65,7 +74,7 @@ public class PlayerSpellcast : MonoBehaviour {
 						if(enemyCoord.isEqual (rangeNorth) || 
 						   enemyCoord.isEqual (rangeSouth) || 
 						   enemyCoord.isEqual (rangeWest) || 
-						   enemyCoord.isEqual (rangeSouth) ) {
+						   enemyCoord.isEqual (rangeEast) ) {
 							newEnemyList.Add (allEnemies[i]);
 							break;
 						}

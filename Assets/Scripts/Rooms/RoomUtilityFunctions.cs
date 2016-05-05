@@ -57,7 +57,7 @@ public class MapValidationFunctions {
 	//
 	// If we have the time, we should separate these. But for now, prioritize
 	// having flood fill work in general first.
-	public void warpPlayer(Tile[,] map) {
+	public static Coord warpPlayer(Tile[,] map) {
 
 		int rows = map.GetLength (0);
 		int columns = map.GetLength (1);
@@ -72,16 +72,21 @@ public class MapValidationFunctions {
 				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
 				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
 				rb2D.MovePosition(moveMe);
-				return;
+				return(new Coord(candidX, candidY));
 			}
 			
 		}
 	}
 
-	public void FloodFillCheck(Tile[,] map, int x, int y, Coord start, Coord stop) {
+	public void FloodFillCheck(Tile[,] map, Coord current, Coord stop) {
 		// The recursive algorithm. Starting at x and y, traverse down adjacent tiles and mark them if travelled, find the exit from the entrance
 			int mapWidth = map.GetLength(0);
 			int mapHeight = map.GetLength(1);
+
+			int x = current.x;
+			int y = current.y;
+
+			//Debug.Log (x.ToString() + " and " + y.ToString () );
 
 			if (map[x,y].mark != 0)
 				// Base case. If the current tile is marked, then do nothing.
@@ -90,23 +95,24 @@ public class MapValidationFunctions {
 				// Change the current tile as marked
 				map[x,y].mark = 1;
 
-			if ( stop.isEqual (new Coord(x,y)) ) {
+			if ( stop.isEqual (current) ) {
+				Debug.Log ("Hit at " + current.x.ToString() + " " + current.y.ToString ());
 				clearable = true;
 				return;
 			}
 					// Recursive calls. Make a recursive call as long as we are not on the
 					// boundary (which would cause an Index Error.)
-			if (x > 0) // left
-				FloodFillCheck(map, x-1, y, start, stop);
+			if (x > 0 && !isSolid (map, current.nextCoord (Direction.West)) ) // left
+				FloodFillCheck(map, current.nextCoord (Direction.West), stop);
 
-			if (y > 0) // up
-				FloodFillCheck(map, x, y-1, start, stop);
+			if (y > 0 && !isSolid (map, current.nextCoord (Direction.South)) ) // up
+				FloodFillCheck(map, current.nextCoord (Direction.South), stop);
 
-			if (x < mapWidth-1) // right
-				FloodFillCheck(map, x+1, y, start, stop);
+			if (x < mapWidth-1 && !isSolid (map, current.nextCoord (Direction.East)) ) // right
+				FloodFillCheck(map, current.nextCoord (Direction.East), stop);
 
-			if (y < mapHeight-1) // down
-				FloodFillCheck(map, x, y+1, start, stop);
+			if (y < mapHeight-1 && !isSolid (map, current.nextCoord (Direction.North)) ) // down
+				FloodFillCheck(map, current.nextCoord (Direction.North), stop);
 
 	}
 }

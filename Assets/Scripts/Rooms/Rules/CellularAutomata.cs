@@ -117,7 +117,7 @@ public class CellularAutomata : BaseRuleset {
 		Debug.Log ("Step 3");
 
 		// New purpose! WARP THE PLAYER to a proposed spot and see if we can accomplish floodfill.
-		mapValidFuncs.warpPlayer (map);
+		//mapValidFuncs.warpPlayer (map);
 
 		/*
 		// Print the map.

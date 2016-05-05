@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: c581b43fcedde594a8e819ebe7141915
-timeCreated: 1457588690
+guid: 7bd17d4bfc7521542b4f8dc468948440
+timeCreated: 1462432067
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Viridian Strip_strip6_0
-    21300002: Viridian Strip_strip6_1
-    21300004: Viridian Strip_strip6_2
-    21300006: Viridian Strip_strip6_3
-    21300008: Viridian Strip_strip6_4
-    21300010: Viridian Strip_strip6_5
+    21300000: Explosion_0
+    21300002: Explosion_1
+    21300004: Explosion_2
+    21300006: Explosion_3
+    21300008: Explosion_4
+    21300010: Explosion_5
+    21300012: Explosion_6
+    21300014: Explosion_7
+    21300016: Explosion_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -49,69 +52,99 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Viridian Strip_strip6_0
+    - name: Explosion_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 25
-        height: 39
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Viridian Strip_strip6_1
+    - name: Explosion_1
       rect:
         serializedVersion: 2
-        x: 25
+        x: 32
         y: 0
-        width: 25
-        height: 39
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Viridian Strip_strip6_2
+    - name: Explosion_2
       rect:
         serializedVersion: 2
-        x: 50
+        x: 64
         y: 0
-        width: 25
-        height: 39
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Viridian Strip_strip6_3
+    - name: Explosion_3
       rect:
         serializedVersion: 2
-        x: 75
+        x: 96
         y: 0
-        width: 25
-        height: 39
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Viridian Strip_strip6_4
+    - name: Explosion_4
       rect:
         serializedVersion: 2
-        x: 100
+        x: 128
         y: 0
-        width: 25
-        height: 39
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Viridian Strip_strip6_5
+    - name: Explosion_5
       rect:
         serializedVersion: 2
-        x: 125
+        x: 160
         y: 0
-        width: 25
-        height: 39
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Explosion_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Explosion_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Explosion_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -14,14 +14,14 @@ public class BossStage : BaseRuleset {
 
 	public BossStage(int r, int c) {
 		row = 16;
-		col = 16;
+		col = 32;
 		map = new Tile[row,col];
 		mapValidFuncs = new MapValidationFunctions();
 	}
 
 	public override void setRowCol(int r, int c) {
 		row = 16;
-		col = 16;
+		col = 32;
 		map = new Tile[row,col];
 	}
 
@@ -143,6 +143,14 @@ public class BossStage : BaseRuleset {
         map[14, 11].property = TileType.OuterWall1;
         map[14, 12].property = TileType.OuterWall1;
 
+		for(int i = 0; i < row; i++)
+			for(int j = 16; j < col; j++)
+				map[i,j].property = TileType.OuterWall1;
+
+		for(int i = 7; i < 9; i++)
+			for(int j = 16; j < col; j++)
+				map[i,j].property = TileType.Floor1;
+
         for (int i = 6; i < 6; i++)
 			for(int j = 3; j < 4; j++)
 				map[i,j].property = TileType.OuterWall1;
@@ -161,7 +169,7 @@ public class BossStage : BaseRuleset {
 		}
 
 		// New purpose! WARP THE PLAYER to a proposed spot and see if we can accomplish floodfill.
-		mapValidFuncs.warpPlayer (map);
+		//mapValidFuncs.warpPlayer (map);
 
 		/*
 		// Print the map.

@@ -85,6 +85,10 @@ public class RoomManager : MonoBehaviour {
 		// So wiggles and jiggles I guess
 		dummyEnemySetup();
 
+		Coord playerLocation = MapValidationFunctions.warpPlayer (selectedRule.map);
+
+		pickWarpLocation(playerLocation);
+
 		// And we may as well do a player one too. What the hey.
 		//dummyPlayerSetup();
 	}
@@ -158,7 +162,7 @@ public class RoomManager : MonoBehaviour {
 		}
 	}
 
-	public void dummyPlayerSetup(){
+	public Coord dummyPlayerSetup(){
 		// Simple function to put the player into some available spot in the map.
 		while(true){
 			int candidX = Random.Range(0, rows);
@@ -170,9 +174,37 @@ public class RoomManager : MonoBehaviour {
 				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
 				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
 				rb2D.MovePosition(moveMe);
-				return;
+				return(new Coord(candidX, candidY));
 			}
 
 		}
+	}
+
+	public void pickWarpLocation(Coord playerLocation) {
+		// GOOD LOC OK
+		int counter = 0;
+		MapValidationFunctions mvf = new MapValidationFunctions();
+		GameObject playerChar = GameObject.FindGameObjectWithTag ("Player");
+		int playerX = playerLocation.x;
+		int playerY = playerLocation.y;
+		while(true && counter < 100){
+			int candidX = Random.Range(1, rows-1);
+			int candidY = Random.Range(1, columns-1); 
+			Tile[,] candidMap = selectedRule.map;
+			mvf.FloodFillCheck( candidMap, new Coord(candidX, candidY), new Coord(playerX, playerY));
+			if((candidMap[candidX,candidY]).property == TileType.Floor1 && mvf.clearable ) {
+				// We need to move the player to this position.
+				Vector3 moveMe = new Vector3(candidX, candidY);
+				GameObject warpObj = GameObject.FindGameObjectWithTag("Warp");
+				warpObj.transform.position = moveMe;
+				return;
+			}
+			Debug.Log ("Failed for " + playerX.ToString () + " and " + playerY.ToString () + " to " + candidX.ToString () + " and " + candidY.ToString());
+			counter++;
+		}
+		Vector3 nigga = new Vector3(0,0);
+		GameObject mogp = GameObject.FindGameObjectWithTag("Warp");
+		mogp.transform.position = nigga;
+		return;
 	}
 }

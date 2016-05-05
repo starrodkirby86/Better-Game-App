@@ -42,10 +42,10 @@ protected override void Start()
 		if(Input.GetButtonDown ("Fire1"))
 		{
 			// The spellcast script should help with the rest.
-			playerStats.playerCurrentMP -= 100;
+			// playerStats.playerCurrentMP -= 100;
 
-			if(playerStats.playerCurrentMP <= 0)
-				playerStats.playerCurrentMP = 0;
+			// if(playerStats.playerCurrentMP <= 0)
+			//	 playerStats.playerCurrentMP = 0;
 
 			GameManager.instance.playersTurn = false;
 		}
@@ -79,10 +79,11 @@ protected override void Start()
     // Function that is invoked when character touches doors, enemies, exits, etc.
     private void OnTriggerEnter2D (Collider2D other)
     {
-        if (other.tag == "Door")
+        if (other.tag == "Warp")
         {
-            Invoke("Restart", restartLevelDelay);
-            enabled = false;
+			GameObject stairObject = other.gameObject;
+			NewRoom launchTime = stairObject.GetComponent<NewRoom>();
+			launchTime.launchToNextLevel();
         }
         else if (other.tag == "Enemy")
         {
@@ -136,5 +137,9 @@ protected override void Start()
 
 	public int getPlayerCurrentMP() {
 		return playerStats.playerCurrentMP;
+	}
+
+	public void setPlayerCurrentMP(int newMP){
+		playerStats.playerCurrentMP = newMP;
 	}
 }

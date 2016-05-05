@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
 
 		enemies = new List<Enemy>();
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         InitGame();
     }

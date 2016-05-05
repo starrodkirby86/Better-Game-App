@@ -42,14 +42,11 @@ public class Nazareth : BaseRuleset {
 
 		Debug.Log ("Step 1");
 
-		map[10,8].property = TileType.OuterWall1;
-		map[9,8].property = TileType.OuterWall1;
-		map[10,9].property = TileType.OuterWall1;
-		map[10,7].property = TileType.OuterWall1;
+		for(int i = 0; i < row; i++)
+				map[i,8].property = TileType.OuterWall1;
 
-		for(int i = 3; i < 5; i++)
-			for(int j = 5; j < 8; j++)
-				map[i,j].property = TileType.OuterWall1;
+		for(int i = 0; i < col; i++)
+			map[8,i].property = TileType.OuterWall1;
 
 		// Also fill the corner wall tiles as walls
 		for(int i = 0; i < row; i++)
@@ -65,7 +62,7 @@ public class Nazareth : BaseRuleset {
 		}
 
 		// New purpose! WARP THE PLAYER to a proposed spot and see if we can accomplish floodfill.
-		mapValidFuncs.warpPlayer (map);
+		//mapValidFuncs.warpPlayer (map);
 
 		/*
 		// Print the map.
