@@ -11,16 +11,137 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;		// Unity Random
+using System.Linq;
+using System.Text;
 
 
 
 /**
  * Generic functions that help make adding certain
  * tiles when generating algorithms.
- * -> Explode tile
  */
 public class TileFunctions {
 
+
+	// For linspace
+	public static IEnumerable<double> Arrange(double start, int count)
+	{
+		return Enumerable.Range((int)start, count).Select(v => (double)v);
+	}
+
+	public static IEnumerable<double> LinSpace(double start, double stop, int num, bool endpoint = true)
+	{
+		var result = new List<double>();
+		if (num <= 0)
+		{
+			return result;
+		}
+		
+		if (endpoint)
+		{
+			if (num == 1) 
+			{
+				return new List<double>() { start };
+			}
+			
+			var step = (stop - start)/ ((double)num - 1.0d);
+			result = Arrange(0, num).Select(v => (v * step) + start).ToList();
+		}
+		else 
+		{
+			var step = (stop - start) / (double)num;
+			result = Arrange(0, num).Select(v => (v * step) + start).ToList();
+		}
+		
+		return result;
+	}
+
+	// Generate a line from one coordinate to another
+	// You can ask for it to be totaly walls or totally floor, based on the bool
+	// False: Walls
+	// True: Floor
+	public static void makeLine(Tile[,] map, Coord begin, Coord end, bool applyFloor) {
+
+		// Assert in range
+		if( begin.isOOB (map.GetLength(0), map.GetLength (1), Direction.Stop) ||
+		    end.isOOB (map.GetLength(0), map.GetLength (1), Direction.Stop) )
+			return;
+		
+		int startX = begin.x;
+		int endX = end.x;
+		int startY = begin.y;
+		int endY = end.y;
+
+
+		// Find the linear spacing appropriate from point
+		// including the endpoint
+		int lengthX = Math.Abs( endX - startX );
+
+		var linspace = new List<Double>();
+			linspace = LinSpace (startY, endY, lengthX, true).ToList ();
+
+		// Now it's time to actually put our money where our mouth is
+		for(int i = startX; i < endX; i++) {
+			int j = (int) linspace[i] ;
+			map[i,j].property = applyFloor ? TileType.Floor1 : TileType.OuterWall1;
+		}
+
+		// Phew! Thought this one was so easy, didn't cha!?
+
+		return;
+	}
+
+	// Generate a rectangle starting from the topleft point to the bottomright point
+	// You can ask for it to be totally walls or totally floor, based on the bool
+	// False: Walls
+	// True: Floor
+	public static void makeRectangle(Tile[,] map, Coord topLeft, Coord bottomRight, bool applyFloor) {
+
+		// Assert that topLeft and bottomRight are in range
+		if( topLeft.isOOB (map.GetLength(0), map.GetLength (1), Direction.Stop) ||
+			bottomRight.isOOB (map.GetLength(0), map.GetLength (1), Direction.Stop) )
+			return;
+
+		int startX = topLeft.x;
+		int endX = bottomRight.x;
+		int startY = bottomRight.y;
+		int endY = topLeft.y;
+
+		for(int i = startX; i < endX; i++) {
+			for(int j = startY; j < endY; j++) {
+				map[i,j].property = applyFloor ? TileType.Floor1 : TileType.OuterWall1;
+			}
+		}
+
+		return;
+
+	}
+
+	public static void clearMap(Tile[,] map, bool applyFloor) {
+		for(int i = 0; i < map.GetLength (0); i++) {
+			for(int j = 0; j < map.GetLength (1); j++) {
+				map[i,j].property = applyFloor ? TileType.Floor1 : TileType.OuterWall1;
+			}
+		}
+	}
+
+	public static void fillCorners(Tile[,] map) {
+		// Also fill the corner wall tiles as walls
+		var row = map.GetLength (0);
+		var col = map.GetLength (1);
+
+		for(int i = 0; i < row; i++)
+		{
+			map[i,0].property = TileType.OuterWall1;
+			map[i,col-1].property = TileType.OuterWall1;
+		}
+		
+		for(int j = 0; j < col; j++)
+		{
+			map[0,j].property = TileType.OuterWall1;
+			map[row-1,j].property = TileType.OuterWall1;
+		}
+	}
 }
 
 /**

@@ -13,12 +13,14 @@ public class PlayerMovement : Movement
 	[SerializeField] PlayerStats playerStats;
     Animator animator;
     private int playerHealth;
+	private int playerCounter;
 
 // Use this for initialization
 protected override void Start()
     {
         animator = GetComponent<Animator>();
 		playerStats = GetComponent<PlayerStats>();
+		playerCounter = 0;
 		base.Start ();
     }
 
@@ -73,6 +75,13 @@ protected override void Start()
 
         //RaycastHit2D hit;
         //CheckIfGameOver();
+		playerCounter++;
+
+		if(playerCounter > 35) {
+			playerCounter = 0;
+			setPlayerCurrentMP(playerStats.playerCurrentMP + 20);
+		}
+
         GameManager.instance.playersTurn = false;
 		return;
     }
@@ -118,6 +127,7 @@ protected override void Start()
     private void CheckIfGameOver()
     {
 		if (playerStats.playerCurrentHP <= 0) {
+			playerStats.playerCurrentHP = 0;
 			Debug.Log ("Ass tits");
 			GameManager.instance.GameOver(); }
     }

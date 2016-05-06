@@ -26,13 +26,13 @@ public class DrLiu : Enemy
     // Use this for initialization
     protected void Awake()
     {
-		GameManager.instance.AddEnemyToList(this);
+		//GameManager.instance.AddEnemyToList(this);
         animator = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 		enemyStats = GetComponent<EnemyStats>();
 		source = GetComponent<AudioSource>();
-		makeUI ();
-        base.Start();
+		//makeUI ();
+        //base.Start();
     }
 
     protected override void AttemptMove<T>(int xDir, int yDir)
@@ -67,6 +67,8 @@ public class DrLiu : Enemy
 			int playerY = (int)player.transform.position.y;
 
 			if(playerY < 12) encountered = true;
+
+			if(enemyStats.enemyCurrentHP < enemyStats.enemyHealth) encountered = true;
 
 			Debug.Log ("...");
 

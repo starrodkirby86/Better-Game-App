@@ -25,6 +25,7 @@ public class RuleManager
 		rulesetDictionary.Add (counter++, new SemiRandom());
 		rulesetDictionary.Add (counter++, new Nazareth());
 		rulesetDictionary.Add (counter++, new MoistLucifer());
+		rulesetDictionary.Add (counter++, new Squaredance());
 		rulesetDictionary.Add (counter++, new BossStage());
 
 	}
@@ -40,5 +41,6 @@ public enum Rulesets {
 	SemiRandom,
 	Nazareth,
 	MoistLucifer,
+	Squaredance,
 	BossStage
 };
