@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
 		for (int i = 0; i < enemies.Count; i++)
 		{
 			enemies[i].MoveEnemy();
-			yield return new WaitForSeconds(enemies[i].moveTime);
+			yield return new WaitForSeconds(enemies[i].moveTime*0.01f);
 		}
 
 		playersTurn = true;
