@@ -178,6 +178,13 @@ public class MapValidationFunctions {
 	//
 	// If we have the time, we should separate these. But for now, prioritize
 	// having flood fill work in general first.
+
+	// Manhattan Distance.
+	// Nice meme.
+	public static int manhattanDistance(Coord a, Coord b) {
+		return Math.Abs(b.x - a.x) + Math.Abs (b.y - a.y);
+	}
+
 	public static Coord warpPlayer(Tile[,] map) {
 
 		int rows = map.GetLength (0);
@@ -193,7 +200,7 @@ public class MapValidationFunctions {
 				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
 				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
 				rb2D.MovePosition(moveMe);
-				return(new Coord(candidX, candidY));
+				return( new Coord(candidX, candidY) );
 			}
 			
 		}

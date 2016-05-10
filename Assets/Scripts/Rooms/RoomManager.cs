@@ -192,7 +192,10 @@ public class RoomManager : MonoBehaviour {
 			int candidY = Random.Range(1, columns-1); 
 			Tile[,] candidMap = selectedRule.map;
 			mvf.FloodFillCheck( candidMap, new Coord(candidX, candidY), new Coord(playerX, playerY));
-			if((candidMap[candidX,candidY]).property == TileType.Floor1 && mvf.clearable ) {
+			if((candidMap[candidX,candidY]).property == TileType.Floor1
+			   && mvf.clearable
+			   && ( MapValidationFunctions.manhattanDistance( new Coord(candidX, candidY), new Coord(playerX, playerY) ) >= (int)(rows/1.5)
+			        || MapValidationFunctions.manhattanDistance( new Coord(candidX, candidY), new Coord(playerX, playerY) ) >= (int)(columns/1.5)) ) {
 				// We need to move the player to this position.
 				Vector3 moveMe = new Vector3(candidX, candidY);
 				GameObject warpObj = GameObject.FindGameObjectWithTag("Warp");
