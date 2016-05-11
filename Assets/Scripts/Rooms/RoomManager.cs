@@ -200,11 +200,14 @@ public class RoomManager : MonoBehaviour {
 				Vector3 moveMe = new Vector3(candidX, candidY);
 				GameObject warpObj = GameObject.FindGameObjectWithTag("Warp");
 				warpObj.transform.position = moveMe;
+				Debug.Log ("Found. Warp is at (" + candidX + "," + candidY + ")");
 				return;
 			}
 			Debug.Log ("Failed for " + playerX.ToString () + " and " + playerY.ToString () + " to " + candidX.ToString () + " and " + candidY.ToString());
 			counter++;
 		}
+
+		Debug.Log ("I give up. Default warp to (0,0).");
 		Vector3 findme = new Vector3(0,0);
 		GameObject ok = GameObject.FindGameObjectWithTag("Warp");
 		ok.transform.position = findme;

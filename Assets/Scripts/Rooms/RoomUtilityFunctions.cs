@@ -198,8 +198,8 @@ public class MapValidationFunctions {
 				// We need to move the player to this position.
 				Vector3 moveMe = new Vector3(candidX, candidY);
 				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
-				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
-				rb2D.MovePosition(moveMe);
+				playerChar.transform.position = moveMe;
+				Debug.Log ( "Spawning player at (" + candidX + "," + candidY + ")" ); 
 				return( new Coord(candidX, candidY) );
 			}
 			
