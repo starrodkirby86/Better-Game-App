@@ -194,7 +194,20 @@ public class MapValidationFunctions {
 			int candidX = Random.Range(0, rows);
 			int candidY = Random.Range(0, columns); 
 			Tile[,] candidMap = map;
-			if((candidMap[candidX,candidY]).property == TileType.Floor1) {
+
+			List<Enemy> allEnemies = GameManager.instance.getListOfEnemies();
+
+			// This check is if we're on top of an enemy.
+			bool onTopOfEnemy = false;
+			for(int i = 0; i < allEnemies.Count; i++) {
+
+				if( allEnemies[i].transform.position == new Vector3(candidX, candidY, 0) ) {
+					onTopOfEnemy = true;
+					break;
+				}
+			}
+
+			if( (candidMap[candidX,candidY]).property == TileType.Floor1 && !onTopOfEnemy ) {
 				// We need to move the player to this position.
 				Vector3 moveMe = new Vector3(candidX, candidY);
 				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");

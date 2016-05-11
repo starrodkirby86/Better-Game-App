@@ -59,14 +59,20 @@ public class PlayerSpellcast : MonoBehaviour {
 				List<Enemy> newEnemyList = new List<Enemy>();
 				List<Enemy> allEnemies = GameManager.instance.getListOfEnemies();
 				for(int i = 0; i < allEnemies.Count; i++) {
+
 					// Store coordinates for calculations
 					Coord enemyCoord = new Coord((int)allEnemies[i].transform.position.x, (int)allEnemies[i].transform.position.y);
+					bool sameSpot = false;
+					if(enemyCoord.isEqual(playerCoord)) {
+						newEnemyList.Add (allEnemies[i]);
+						sameSpot = true;
+					}
 					rangeNorth = rangeSouth = rangeWest = rangeEast = playerCoord;
 					// We'll have to travel down the particle's route
 					// and see if the enemy lands squarely within that.
 					// If so, then we're going to add it to the hit list and break
 					// (we don't need to keep searching)
-					for(int j = 1; j <= spellRadius; j++) {
+					for(int j = 1; j <= spellRadius && !sameSpot; j++) {
 						rangeNorth = rangeNorth.nextCoord (Direction.North);
 						rangeSouth = rangeSouth.nextCoord (Direction.South);
 						rangeWest = rangeWest.nextCoord (Direction.West);

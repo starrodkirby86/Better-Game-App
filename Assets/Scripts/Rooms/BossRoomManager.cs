@@ -122,24 +122,7 @@ public class BossRoomManager : MonoBehaviour {
 	public void bossEnemySetup(){
 		GameObject instance = Instantiate (trueEvil, new Vector3(7, 8, 0), Quaternion.identity) as GameObject;
 	}
-
-	public Coord dummyPlayerSetup(){
-		// Simple function to put the player into some available spot in the map.
-		while(true){
-			int candidX = Random.Range(0, rows);
-			int candidY = Random.Range(0, columns); 
-			Tile[,] candidMap = selectedRule.map;
-			if((candidMap[candidX,candidY]).property == TileType.Floor1) {
-				// We need to move the player to this position.
-				Vector3 moveMe = new Vector3(candidX, candidY);
-				GameObject playerChar = GameObject.FindGameObjectWithTag("Player");
-				Rigidbody2D rb2D = playerChar.GetComponent<Rigidbody2D>() as Rigidbody2D;
-				rb2D.MovePosition(moveMe);
-				return(new Coord(candidX, candidY));
-			}
-
-		}
-	}
+	
 
 	public void pickWarpLocation() {
 		// GOOD LOC OK
