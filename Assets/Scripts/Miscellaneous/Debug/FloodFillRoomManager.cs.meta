@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1ad08f64725b6f144b143b5f0f1cbd4c
+timeCreated: 1462941915
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - tilesetToUse: {fileID: 144826, guid: 422eebf74807b574eb3632d66163d0e8, type: 2}
+  - jiggles: {instanceID: 0}
+  - wiggles: {instanceID: 0}
+  - floodStartMarker: {fileID: 164540, guid: 052aadfe1a601394db70946f1915b2c6, type: 2}
+  - floodGoalMarker: {fileID: 153648, guid: 77494380c7bd35a4586469a074f7f767, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

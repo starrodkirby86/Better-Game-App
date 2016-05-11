@@ -70,7 +70,7 @@ public class RoomManager : MonoBehaviour {
 	// SOME PRIVATES HAHAHA
 	private Transform boardHolder; // Holds up all the tile objects
 
-	public void Start() {
+	public virtual void Start() {
 		ruleMan = new RuleManager();
 		//tileMan = new TilesetManager();
 
@@ -118,7 +118,7 @@ public class RoomManager : MonoBehaviour {
 	}
 	*/
 
-	public void boardSetup() {
+	public virtual void boardSetup() {
 
 		boardHolder = new GameObject ("Board").transform;
 
@@ -185,17 +185,32 @@ public class RoomManager : MonoBehaviour {
 		int counter = 0;
 		MapValidationFunctions mvf = new MapValidationFunctions();
 		GameObject playerChar = GameObject.FindGameObjectWithTag ("Player");
+		bool mercyLength = false;
 		int playerX = playerLocation.x;
 		int playerY = playerLocation.y;
-		while(true && counter < 100){
-			int candidX = Random.Range(1, rows-1);
-			int candidY = Random.Range(1, columns-1); 
+		int candidX = 0;
+		int candidY = 0;
+		while(true && counter < 200){
+
+			if(counter > 100 && !mercyLength) {
+				Debug.Log ("Lasted too long, give a mercy kill for the distance metric.");
+				mercyLength = true;
+			}
+
+			do {
+				candidX = Random.Range(1, rows-1);
+				candidY = Random.Range(1, columns-1);
+			} while (candidX == playerX && candidY == playerY);
+
 			Tile[,] candidMap = selectedRule.map;
+			MapValidationFunctions.clearMapMark(candidMap);
+			Debug.Log ("Proposing point " + candidX.ToString () + " and " + candidY.ToString());
 			mvf.FloodFillCheck( candidMap, new Coord(candidX, candidY), new Coord(playerX, playerY));
 			if((candidMap[candidX,candidY]).property == TileType.Floor1
-			   && mvf.clearable
-			   && ( MapValidationFunctions.manhattanDistance( new Coord(candidX, candidY), new Coord(playerX, playerY) ) >= (int)(rows/1.5)
-			        || MapValidationFunctions.manhattanDistance( new Coord(candidX, candidY), new Coord(playerX, playerY) ) >= (int)(columns/1.5)) ) {
+			   && MapValidationFunctions.clearable
+			   && ( MapValidationFunctions.manhattanDistance( new Coord(candidX, candidY), new Coord(playerX, playerY) ) >= (int)(rows)
+			        || MapValidationFunctions.manhattanDistance( new Coord(candidX, candidY), new Coord(playerX, playerY) ) >= (int)(columns)
+			   		|| mercyLength)) {
 				// We need to move the player to this position.
 				Vector3 moveMe = new Vector3(candidX, candidY);
 				GameObject warpObj = GameObject.FindGameObjectWithTag("Warp");
@@ -207,8 +222,9 @@ public class RoomManager : MonoBehaviour {
 			counter++;
 		}
 
-		Debug.Log ("I give up. Default warp to (0,0).");
-		Vector3 findme = new Vector3(0,0);
+		// You really don't want to be at this spot.
+		Debug.Log ("I give up. Default warp to the midpoint.");
+		Vector3 findme = new Vector3(rows/2,columns/2);
 		GameObject ok = GameObject.FindGameObjectWithTag("Warp");
 		ok.transform.position = findme;
 		return;

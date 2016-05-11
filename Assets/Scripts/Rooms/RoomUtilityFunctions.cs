@@ -153,7 +153,7 @@ public class TileFunctions {
  * -> FloodfillCheck
  */
 public class MapValidationFunctions {
-	public Boolean clearable = false;
+	public static Boolean clearable = false;
 
 
 	/**
@@ -206,6 +206,20 @@ public class MapValidationFunctions {
 		}
 	}
 
+	// Clears out the map of marked tiles.
+	public static void clearMapMark(Tile[,] map) {
+
+		Debug.Log ("Cleared.");
+
+		clearable = false;
+
+		for(int i = 0; i < map.GetLength (0); i++) {
+			for(int j = 0; j < map.GetLength (1); j++) {
+				map[i,j].mark = 0;
+			}
+		}
+	}
+
 	public void FloodFillCheck(Tile[,] map, Coord current, Coord stop) {
 		// The recursive algorithm. Starting at x and y, traverse down adjacent tiles and mark them if travelled, find the exit from the entrance
 			int mapWidth = map.GetLength(0);
@@ -224,7 +238,7 @@ public class MapValidationFunctions {
 				map[x,y].mark = 1;
 
 			if ( stop.isEqual (current) ) {
-				Debug.Log ("Hit at " + current.x.ToString() + " " + current.y.ToString ());
+				Debug.Log ("Flood Fill found, flagging clearable: " + current.x.ToString() + " " + current.y.ToString ());
 				clearable = true;
 				return;
 			}
